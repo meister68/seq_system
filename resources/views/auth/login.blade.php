@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+        <!-- Styles -->
+        <link href="{{ asset('css/form.css') }}" rel="stylesheet">
+<br>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
+        <div class="col-md-6">
+                <center><div class="card-header">{{ __('Login') }}</div></center>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                         @csrf
@@ -64,7 +65,6 @@
                         </div>
                     </form>
                 </div>
-            </div>
         </div>
     </div>
 </div>
