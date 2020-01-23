@@ -15,6 +15,7 @@
                     @endif
 
                     You are logged in!
+                    {{$value}}
                 </div>
             </div>
         </div>
