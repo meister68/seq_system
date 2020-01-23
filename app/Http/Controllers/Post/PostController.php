@@ -23,7 +23,7 @@ class PostController extends Controller
     public function editPost($post_id)  
     {   
         $post = Post::find($post_id);
-        //return view('contacts.editContact',['contact'=>$contact]);
+        return redirect('/home');
     }
 
     public function updatePost(Request $request, $post_id)

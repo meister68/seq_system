@@ -26,4 +26,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function scopeActive($query) {
+        return $query->where('active', 1);
+    }
+
+    public function posts() {
+        return $this->hasMany("App\Post");
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }
