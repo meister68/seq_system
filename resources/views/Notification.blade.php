@@ -19,4 +19,22 @@
     </div>
 </nav>
 
+<script type='text/javascript'>
+    //Pusher.logToConsole = true;
+    var pusher = new Pusher('59a1d10e99c58e2524f0',{ cluster: 'ap1' }, {
+        encrypted: true
+    });
+    var channel = pusher.subscribe('test');
+     //console.log(channel);
+  
+
+    
+
+    var channel = pusher.subscribe('test');
+    channel.bind('App\\Events\\CommentEvent', function(data) {
+      alert(data);
+    });
+    
+
+</script>
 @endsection('content')

@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        'App\Events\CommentEvent' => [
+            'App\Listeners\CommentListener',
         ],
     ];
 
@@ -23,10 +23,18 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
+
+    public function shouldDiscoverEvents()
+    {
+        return true;
+    }
     public function boot()
     {
         parent::boot();
 
         //
     }
+
+   
 }

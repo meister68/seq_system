@@ -1,5 +1,5 @@
 <?php
-
+use App\Events\CommentEvent;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +19,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/test', function () {
+    event(new CommentEvent('hello world'));
+    return "Event has been sent!";
+    
+});
 Route::get('/notif', 'HomeController@showNotif');
 
 Route::prefix('post')->group( function() {
