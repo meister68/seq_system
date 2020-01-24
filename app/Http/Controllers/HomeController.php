@@ -37,6 +37,10 @@ class HomeController extends Controller
         return view('home',compact('post','value'));
     
     }
+    public function showNotif()
+    {
+        return view('Notification');
+    }
 
    
       
