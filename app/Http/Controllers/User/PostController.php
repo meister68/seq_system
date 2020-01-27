@@ -11,14 +11,15 @@ class PostController extends Controller
     //
     public function addPost(Request $request)
     {
-        // $validate_data = $request->validate([
-        //     'title' => 'required',
-        //     'description' => 'required'
-        // ]);
+        $validate_data = $request->validate([
+            'user_id' => 'required',
+            'title' => 'required',
+            'description' => 'required'
+        ]);
 
-        // Post::create($request->all());
-        //return redirect('/home');
-        return 'create post page';
+        Post::create($request->all());
+        return redirect('/home');
+        // return 'create post page';
     }
 
     public function editPost($post_id)  
@@ -39,4 +40,6 @@ class PostController extends Controller
         Post::deletePost($post_id);
         return  redirect('/home');
     }
+
+    
 }
