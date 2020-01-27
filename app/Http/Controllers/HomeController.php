@@ -31,17 +31,14 @@ class HomeController extends Controller
         $id = $user->id;
         $email = $user->email;
         session(['id' => $id, 'email' => $email]);
-        $value = $request->session()->pull('email');
+        // $value = $request->session()->pull('email');
         
         return view('home',compact('post','value'));
     
     }
-    public function showNotif()
-    {
-        // /event(new App\Events\CommentNotification('test'));
-        return view('Notification');
-    }
+
     public function ask(){
+
         return view('askQuestion');
     }
 

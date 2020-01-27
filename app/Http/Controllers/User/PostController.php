@@ -16,16 +16,21 @@ class PostController extends Controller
         //     'description' => 'required'
         // ]);
 
-        // Post::create($request->all());
-        //return redirect('/home');
-        return 'create post page';
+        $test_data = array(
+            'title' => 'test',
+            'description' => 'test',
+            'user_id' => 1,
+        );
+        (new CrudController('Post'))->store($test_data);
+        return redirect('/home');
     }
 
     public function editPost($post_id)  
     {   
-        $post = Post::find($post_id);
-        //return redirect('/home');
-        return $post_id;
+        $post_id = 1;
+        $post = (new CrudController('Post'))->edit($post_id);
+        return $post;
+        
     }
 
     public function update(Request $request, $post_id)

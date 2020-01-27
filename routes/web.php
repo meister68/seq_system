@@ -16,6 +16,11 @@ Route::get('/', function () {
 });
 
 Route::get('test','Post\CommentController@notify');
+// Route::get('/test2', function () {
+//     return 'test';
+// });
+
+Route::get('/comment', 'User\CommentController@addComment');
 
 Auth::routes();
 
@@ -30,5 +35,10 @@ Route::prefix('post')->group( function() {
     Route::get('delete/{id}', 'User\PostController@removePost');
    
 });
+
+//Route::prefix('comment')->group( function() {
+   
+//});
+
 
 
