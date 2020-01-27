@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Users;
+use App\User;
 use App\Models\Post;
 
 
@@ -13,11 +13,12 @@ class SearchController extends Controller
         if(empty($request->name)) {
             return redirect('/');
         } else {
-            $post = Post::all();
-            $user = User::whereName($request->name)->get();
+            $posts = Post::query()
+            ->where('title', 'LIKE', "%{$request->name}%")->get();
+            // $user = User::whereName($request->name)->get();
             return view('home',
-            ['users' => $user],
-            ['posts'=> $post] 
+            // ['users' => $user],
+            ['post'=> $posts] 
         );
         }
     }

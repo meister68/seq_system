@@ -28,20 +28,11 @@
 </head>
 <body>
     <div id="app">
-<<<<<<< HEAD
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container" id="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
                     SEQ
-=======
-        <nav id="nav" class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <!-- {{ config('app.name', 'Laravel') }} -->
-                    <img src="https://fontmeme.com/permalink/200127/c07b9c3979b94d6c045df4473ef22510.png" alt="3d-fonts" border="0" style="width:55%">
-                    <!-- SEQ -->
->>>>>>> avila
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -64,8 +55,9 @@
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @else
-                        <form class="form-inline my-2 my-lg-0" >
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('search')  }}">
+                            @csrf
+                            <input class="form-control mr-sm-2" name="name" type="text" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                             <li class="nav-item dropdown">

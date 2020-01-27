@@ -29,8 +29,9 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <form class="form-inline my-2 my-lg-0" >
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('search')  }}" >
+                        @csrf
+                            <input class="form-control mr-sm-2" type="text" name="name" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                             &nbsp;&nbsp;&nbsp;
                             <a href="{{ route('login') }}"><h5>Login</h5></a>&nbsp;&nbsp;&nbsp;&nbsp;

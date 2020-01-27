@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/ask','HomeController@ask')->name('ask');
+Route::get('/search', 'SearchController@search')->name('search');
 
 Route::prefix('post')->group( function() {
     Route::post('/', 'User\PostController@addPost')->name('addPost');
@@ -30,5 +31,9 @@ Route::prefix('post')->group( function() {
     Route::get('delete/{id}', 'User\PostController@removePost');
    
 });
+
+// Route::any ( '/search', function () {
+    
+// } );
 
 
