@@ -7,7 +7,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><button type="button" class="btn-outline-primary btn-lg float-right">Ask Question</button></div>
+                <div class="card-header">
+                <center><h4>Ask a Question</h4></center>
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -24,7 +26,9 @@
                             <textarea class="form-control" rows="5" id="comment"></textarea>
                            
                     </div>
+                      
                         <button type="submit" class="btn-outline-success btn-lg float-right">Post</button>
+                        <button type="submit" class="btn-outline-danger btn-lg ">Cancel</button>
                    
                 </div>
             </div>
