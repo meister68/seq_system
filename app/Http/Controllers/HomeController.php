@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Model\Post;
+use App;
+use App\Events\CommentEvent;
 
 class HomeController extends Controller
 {
@@ -21,8 +25,27 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        $user = Auth::user();
+        $id = $user->id;
+        $email = $user->email;
+        session(['id' => $id, 'email' => $email]);
+        $value = $request->session()->pull('email');
+        
+        return view('home',compact('post','value'));
+    
     }
+    public function showNotif()
+    {
+        // /event(new App\Events\CommentNotification('test'));
+        return view('Notification');
+    }
+    public function ask(){
+        return view('askQuestion');
+    }
+
+   
+      
+
 }
