@@ -21,4 +21,19 @@ class Post extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public static function  updatePost($title, $description, $post_id)
+    {
+     $post = Post::find($post_id);
+     $post->title = $title;
+     $post->description = $description;
+     $post->post_id = $post_id;
+     $post->save();
+    }
+ 
+    public static function deletePost($post_id)
+    {
+     $post = Post::find($post_id);
+     $post->delete();
+    }
 }

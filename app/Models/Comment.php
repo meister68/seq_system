@@ -21,4 +21,18 @@ class Comment extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    static function update($body, $comment_id, $post_id)
+    {
+     $comment = Comment::where('id', $comment_id);
+     $post->title = $title;
+     $post->description = $body;
+     $post->save();
+    }
+ 
+    static function delete($comment_id)
+    {
+     $comment = Comment::find($comment_id);
+     $comment->delete();
+    }
 }

@@ -16,10 +16,15 @@
                         </div>
                     @endif
 
+<<<<<<< HEAD
                    <a href="">How to make a table in mysql</a> 
                    <hr>
                    <a href="">How to make a table in mysql</a>
 
+=======
+                    You are logged in!
+                    {{$value}}
+>>>>>>> fd6cf9befbe0bc99b82b6ddb2b7808d61182b69a
                 </div>
             </div>
         </div>
