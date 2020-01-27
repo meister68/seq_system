@@ -16,7 +16,7 @@
                         </div>
                     @endif
                     @foreach($post as $Post)
-                        <a href="">{{ $Post['title'] }}</a>
+                        <a href=""><h3>{{ $Post['title'] }}</h3></a>
                         <hr>
                     @endforeach
 
