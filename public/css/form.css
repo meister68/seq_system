@@ -2,7 +2,11 @@
     background-color: #436375;
     font-size: 30px;
     font-family: Helvetica Narrow, sans-serif;
+    
 }
 .card-body {
     border: 1px solid #436375;
+}
+#div{
+    margin-top: 6%;
 }
