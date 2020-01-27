@@ -28,9 +28,6 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-       // $post = Post::latest()->paginate(5);
-       // return view('home',compact('user'));  
-       //Setting the session
         $id = $user->id;
         $email = $user->email;
         session(['id' => $id, 'email' => $email]);
@@ -43,7 +40,12 @@ class HomeController extends Controller
     {
         // /event(new App\Events\CommentNotification('test'));
         return view('Notification');
-
-        
     }
+    public function ask(){
+        return view('askQuestion');
+    }
+
+   
+      
+
 }
