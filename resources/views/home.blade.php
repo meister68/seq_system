@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><button type="button" class="btn-outline-primary btn-lg float-right">Ask Question</button></div>
+                <div class="card-header"><a href="{{ route('ask') }}"><button type="button" class="btn-outline-primary btn-lg float-right">Ask Question</button></a></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -15,16 +15,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                        <a href="">This is just a test</a>
+                        <hr>
+                        <a href="">This is just a test</a>
 
-<<<<<<< HEAD
-                   <a href="">How to make a table in mysql</a> 
-                   <hr>
-                   <a href="">How to make a table in mysql</a>
-
-=======
-                    You are logged in!
-                    {{$value}}
->>>>>>> fd6cf9befbe0bc99b82b6ddb2b7808d61182b69a
                 </div>
             </div>
         </div>
