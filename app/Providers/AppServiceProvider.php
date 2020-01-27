@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Event;
+use App\Events\CommentEvent;
 
 class AppServiceProvider extends ServiceProvider
 {

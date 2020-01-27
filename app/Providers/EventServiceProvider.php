@@ -14,7 +14,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'App\Events\CommentEvent' => [
-            'App\Listeners\CommentListener',
+            'App\Listeners\CommentEventListener',
         ],
     ];
 

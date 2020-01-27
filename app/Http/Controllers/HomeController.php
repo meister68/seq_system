@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Model\Post;
 use App;
+use App\Events\CommentEvent;
 
 class HomeController extends Controller
 {
@@ -42,6 +43,7 @@ class HomeController extends Controller
     {
         // /event(new App\Events\CommentNotification('test'));
         return view('Notification');
+
         
     }
 }

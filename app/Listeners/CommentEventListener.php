@@ -5,21 +5,18 @@ namespace App\Listeners;
 use App\Events\CommentEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Log;
 
-class CommentListener
+class CommentEventListener
 {
     /**
      * Create the event listener.
      *
      * @return void
      */
-
-     
     public function __construct()
     {
         //
-
-      
     }
 
     /**
@@ -30,6 +27,6 @@ class CommentListener
      */
     public function handle(CommentEvent $event)
     {
-        return $event;
+        Log::info(json_encode($event));
     }
 }

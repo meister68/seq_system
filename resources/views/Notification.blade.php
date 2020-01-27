@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -19,22 +20,17 @@
     </div>
 </nav>
 
-<script type='text/javascript'>
-    //Pusher.logToConsole = true;
-    var pusher = new Pusher('59a1d10e99c58e2524f0',{ cluster: 'ap1' }, {
-        encrypted: true
-    });
-    var channel = pusher.subscribe('test');
-     //console.log(channel);
-  
+ <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+  <script>
 
-    
+   var pusher = new Pusher('{{env("MIX_PUSHER_APP_KEY")}}', {
+      cluster: '{{env("PUSHER_APP_CLUSTER")}}',
+      encrypted: true
+    });
 
     var channel = pusher.subscribe('test');
     channel.bind('App\\Events\\CommentEvent', function(data) {
-      alert(data);
+      console.log(data.message);
     });
-    
-
-</script>
+  </script>
 @endsection('content')

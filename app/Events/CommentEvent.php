@@ -10,24 +10,29 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class CommentEvent implements ShouldBroadcast
+class CommentEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $message;
+    public $username;
 
-    public function __construct($message)
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct($username)
     {
-        $this->message = $message;
-
+        //
+        $this->username = $username;
     }
-  
+
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return \Illuminate\Broadcasting\Channel|array
+     */
     public function broadcastOn()
     {
-        return ['yolo'];
+        return new PrivateChannels('test');
     }
-  
-    public function broadcastAs()
-    {
-        return 'test';
-    }
-  }
+}
