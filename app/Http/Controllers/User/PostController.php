@@ -18,12 +18,7 @@ class PostController extends Controller
             'description' => 'required'
         ]);
 
-        $test_data = array(
-            'title' => 'test',
-            'description' => 'test',
-            'user_id' => 1,
-        );
-        (new CRUD('Post'))->store($test_data);
+        (new CRUD('Post'))->store($request->all());
         return redirect('/home');
     }
 

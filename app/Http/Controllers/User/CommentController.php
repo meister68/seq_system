@@ -33,17 +33,18 @@ class CommentController extends Controller
 
     public  function addComment(Request $request)
     {
-        // $validate_data = $request->validate([
-        //     'description' => 'required',
-        //     'user_id' => 'required',
-        //     'post_id' => 'required'
-        // ]);
-        $test_data = array(
-            'title' => 'test',
-            'body' => 'test',
-            'user_id' => 1,
-            'post_id' => 1
-        );
+        $validate_data = $request->validate([
+            'description' => 'required',
+            'user_id' => 'required',
+            'post_id' => 'required',
+            'status' => 'required|integer'
+        ]);
+        // $test_data = array(
+        //     'title' => 'test',
+        //     'body' => 'test',
+        //     'user_id' => 1,
+        //     'post_id' => 1
+        // );
         (new CRUD('Comment'))->store($test_data);
         return 'added successfully';
       

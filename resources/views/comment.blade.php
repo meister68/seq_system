@@ -19,18 +19,20 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    @foreach($seeBody as $Content)
+                
+                    <!-- @foreach($seeBody as $Content) -->
+                        <!-- sample sa pagkuha sa relationship -->
+                          <!-- echo $seeBody->comment -->
                         <div class="form-group">
                             <label for="comment"><h5 class="font-weight-bold">Title</h5></label>
-                                <p>{{ $Content['title'] }}</p>
+                                <p>{{ $seeBody[0]->title }}</p>
                             <label for="comment"><h6 class="font-weight-bold">Body</h6></label>
-                                <p>{{ $Content['description'] }}</p>  
+                                <p>{{ $seeBody[0]['description'] }}</p>  
                         </div>
-                    @endforeach
-                    <!-- <input type="text" class="form-control form-control-lg" >
-                        <button type="submit" class="btn-outline-success btn-lg float-right">Comment</button>
-                  -->
+
+                        <!-- dre pag butang og foreach sa comment -->
+                    <!-- @endforeach -->
+                  
                       
                         
                         <input  id="comment_box" type="text" value="your comment" />

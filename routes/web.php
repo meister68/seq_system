@@ -38,8 +38,11 @@ Route::prefix('post')->group( function() {
     Route::get('delete/{id}', 'User\PostController@removePost');
 });
 
-// Route::any ( '/search', function () {
-    
-// } );
+Route::prefix('comment')->group( function() {
+    Route::post('/', 'User\CommentController@addComment')->name('addComment');
+    Route::get('/edit/{id}', 'User\PostController@editPost');
+    Route::get('update/{id}', 'User\PostController@update');
+    Route::get('delete/{id}', 'User\PostController@removePost');
+});
 
 

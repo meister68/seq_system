@@ -29,15 +29,11 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $id = $user->id;
-        $email = $user->email;
-        session(['id' => $id, 'email' => $email]);
-        $value = $request->session()->pull('email');
-
-        // $post = Post::where('user_id',$id);
-        $post = Post::where("user_id", "=", $id)->get();
-       // $post = Post::all();
+        session(['id' => $id]);
+        //paginate for comments no next and prev yet
+        $post = Post::where("user_id", "=", $id)->latest()->paginate(2);
         
-        return view('home',compact('post','value'));
+        return view('home',compact('post'));
     
     }
     public function ask(){
@@ -47,10 +43,18 @@ class HomeController extends Controller
 
     public function seeBody($id)
     {
-        // $user = Auth::user();
-        // $id = $user->id;
-        $seeBody = Post::where("id", $id)->get();
-        return view('comment',compact('seeBody'));
+        $sortDirection = 'desc';
+        $seeBody = Post::where("id", $id)
+        ->with(['comment' => function ($query) {
+               $query->latest();
+        }])->get();
+        //$seeBody = Post::with('post')
+        //dd($seeBody);
+        //return $seeBody;
+        //return view('comment',compact('seeBody'));
+        
+       
+        return $seeBody;
     }
 
    
