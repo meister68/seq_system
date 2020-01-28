@@ -8,7 +8,8 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                <center><h4>Ask a Question</h4></center>
+                
+                <center><h4>Find your Answer in your Question</h4></center>
                 </div>
 
                 <div class="card-body">
@@ -21,17 +22,19 @@
 
                     @foreach($seeBody as $Content)
                         <div class="form-group">
-                            <label for="comment"><h3 class="font-weight-bold">Title</h3></label><br>
-                                <h3>{{ $Content['title'] }}</h3>
-                            <label for="comment"><h3 class="font-weight-bold">Body</h3></label>
-                                <h4>{{ $Content['description'] }}</h4>  
+                            <label for="comment"><h5 class="font-weight-bold">Title</h5></label>
+                                <p>{{ $Content['title'] }}</p>
+                            <label for="comment"><h6 class="font-weight-bold">Body</h6></label>
+                                <p>{{ $Content['description'] }}</p>  
                         </div>
                     @endforeach
-                        <button type="submit" class="btn-outline-success btn-lg float-right">Post</button>
-                 
+                    <!-- <input type="text" class="form-control form-control-lg" >
+                        <button type="submit" class="btn-outline-success btn-lg float-right">Comment</button>
+                  -->
                       
                         
-                        <a href="{{ route('home') }}"><button type="submit" class="btn-outline-danger btn-lg ">Cancel</button></a>
+                        <input  id="comment_box" type="text" value="your comment" />
+                        <input  id="comment_submit" type="submit" value="Submit" />
                    
                 </div>
             </div>

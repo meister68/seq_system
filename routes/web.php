@@ -23,7 +23,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/ask','HomeController@ask')->name('ask');
 
-// Route::get('/content','HomeController@seeBody')->name('seeBody');
+Route::get('/content/{id}','HomeController@seeBody')->name('seeBody');
 
 Route::prefix('post')->group( function() {
     Route::post('/', 'User\PostController@addPost')->name('addPost');

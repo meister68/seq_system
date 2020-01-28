@@ -45,13 +45,13 @@ class HomeController extends Controller
         return view('askQuestion');
     }
 
-    // public function seeBody()
-    // {
-     
-       
-    //     $seeBody = Post::where("id")->get();
-    //     return view('comment');
-    // }
+    public function seeBody($id)
+    {
+        // $user = Auth::user();
+        // $id = $user->id;
+        $seeBody = Post::where("id", $id)->get();
+        return view('comment',compact('seeBody'));
+    }
 
    
       
