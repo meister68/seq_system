@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/ask','HomeController@ask')->name('ask');
+Route::get('/search', 'SearchController@search')->name('search');
 
 Route::get('/content/{id}','HomeController@seeBody')->name('seeBody');
 
@@ -31,5 +32,9 @@ Route::prefix('post')->group( function() {
     Route::get('update/{id}', 'User\PostController@update');
     Route::get('delete/{id}', 'User\PostController@removePost');
 });
+
+// Route::any ( '/search', function () {
+    
+// } );
 
 
