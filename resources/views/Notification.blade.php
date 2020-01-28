@@ -32,6 +32,7 @@
   
   <script>
 
+    //comment function
    function test(data) {
       let comment = `<div><p>${data.title}</p></div>`
       $('#test').prepend(comment);
@@ -46,7 +47,5 @@
     channel.bind('App\\Events\\CommentEvent',test)
        
         
-       
-   
   </script>
 @endsection('content')

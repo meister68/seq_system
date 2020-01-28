@@ -51,6 +51,8 @@ class CommentController extends Controller
             'user_id' => 1,
             'post_id' => 1
         );
+        $request['test'] = 'test';
+        //dd($request->user()->id);
         (new CRUD('Comment'))->store($test_data);
         $this->notify($test_data);
         return $request['status'];

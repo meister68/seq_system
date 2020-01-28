@@ -26,7 +26,7 @@ class PostController extends Controller
     {   
         $post_id = 17;
         $post = (new CRUD('Post'))->edit($post_id);
-        return $post;   
+        return redirect('/login');   
     }
 
     public function updatePost(Request $request, $post_id)
