@@ -20,7 +20,7 @@
                         </div>
                     @endif
                 
-                    <!-- @foreach($seeBody as $Content) -->
+                    
                         <!-- sample sa pagkuha sa relationship -->
                           <!-- echo $seeBody->comment -->
                         <div class="form-group">
@@ -31,8 +31,12 @@
                         </div>
 
                         <!-- dre pag butang og foreach sa comment -->
-                    <!-- @endforeach -->
-                  
+                        @foreach ($seeBody[0]->comment as $test)
+                             <div class="form-group">
+                             <p><strong>{{$test->body}}</strong></p>
+                                <p>{{$test->user->name}}</p>
+                            </div>   
+                        @endforeach                    
                       
                         
                         <input  id="comment_box" type="text" value="your comment" />

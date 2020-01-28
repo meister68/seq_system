@@ -20,8 +20,22 @@
     </div>
 </nav>
 
+<div class='container' id="test">
+    
+</div>
+
  <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+ <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script> 
+  
   <script>
+
+   function test(data) {
+      let comment = `<div><p>${data.title}</p></div>`
+      $('#test').prepend(comment);
+    }
 
    var pusher = new Pusher('{{env("MIX_PUSHER_APP_KEY")}}', {
       cluster: '{{env("PUSHER_APP_CLUSTER")}}',
@@ -29,8 +43,10 @@
     });
 
     var channel = pusher.subscribe('test');
-    channel.bind('App\\Events\\CommentEvent', function(data) {
-      console.log(data.message);
-    });
+    channel.bind('App\\Events\\CommentEvent',test)
+       
+        
+       
+   
   </script>
 @endsection('content')

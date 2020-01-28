@@ -30,6 +30,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $id = $user->id;
         session(['id' => $id]);
+
         //paginate for comments no next and prev yet
         $post = Post::where("user_id", "=", $id)->latest()->paginate(2);
         
@@ -45,16 +46,14 @@ class HomeController extends Controller
     {
         $sortDirection = 'desc';
         $seeBody = Post::where("id", $id)
-        ->with(['comment' => function ($query) {
+        ->with(['comment.user' => function ($query) {
                $query->latest();
         }])->get();
-        //$seeBody = Post::with('post')
-        //dd($seeBody);
-        //return $seeBody;
-        //return view('comment',compact('seeBody'));
+        
+        return view('comment',compact('seeBody'));
         
        
-        return $seeBody;
+        //return $seeBody;
     }
 
    

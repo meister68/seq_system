@@ -15,7 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test','Post\CommentController@notify');
+Route::get('test','User\CommentController@notify');
+Route::get('notif', function () {
+    return view('Notification');
+});
 // Route::get('/test2', function () {
 //     return 'test';
 // });
