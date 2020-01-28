@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><a href="{{ route('ask') }}"><button type="button" class="btn-outline-primary btn-lg float-right">Ask Question</button></a></div>
+                <div class="card-header"><a href="{{ route('ask') }}"><button type="button" class="btn-primary btn-lg float-right">Ask Question</button></a></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -16,6 +16,7 @@
                         </div>
                     @endif
                     @foreach($post as $Post)
+                    <hr>
                         <a href="{{ route('seeBody',$Post->id) }}"><h3>{{ $Post['title'] }}</h3></a>
                         <hr>
                     @endforeach

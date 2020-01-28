@@ -12,7 +12,7 @@
                 <center><h4>Find your Answer in your Question</h4></center>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body card example-1 scrollbar-ripe-malinka">
     
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -20,15 +20,12 @@
                         </div>
                     @endif
                 
-                    
-                        <!-- sample sa pagkuha sa relationship -->
-                          <!-- echo $seeBody->comment -->
                         <div class="form-group">
-                            <label for="comment"><h5 class="font-weight-bold">Title</h5></label>
-                                <p>{{ $seeBody[0]->title }}</p>
-                            <label for="comment"><h6 class="font-weight-bold">Body</h6></label>
+                                <p class="font-weight-bold">{{ $seeBody[0]->title }}</p>
                                 <p>{{ $seeBody[0]['description'] }}</p>  
+                                <hr>
                         </div>
+                      
 
                         <!-- dre pag butang og foreach sa comment -->
                         @foreach ($seeBody[0]->comment as $test)
@@ -37,13 +34,21 @@
                                 <p>{{$test->user->name}}</p>
                             </div>   
                         @endforeach                    
-                      
-                        
-                        <input  id="comment_box" type="text" value="your comment" />
-                        <input  id="comment_submit" type="submit" value="Submit" />
-                   
                 </div>
             </div>
+            <br>
+            <form>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="d-flex">
+                                <input class="form-control mr-1">
+                                <button class="btn btn-secondary">Answer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
