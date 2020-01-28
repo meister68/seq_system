@@ -28,8 +28,13 @@
 </head>
 <body>
     <div id="app">
+<<<<<<< HEAD
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container" id="container">
+=======
+        <nav id="nav" class="navbar navbar-expand-md navbar-light navbar-laravel">
+            <div class="container">
+>>>>>>> danica
                 <a class="navbar-brand" href="{{ url('/home') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
                     SEQ
@@ -47,6 +52,11 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <form class="form-inline my-2 my-lg-0" >
+                        @csrf
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -66,6 +76,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item">Notification&nbsp;&nbsp;<span class="badge badge-pill badge-danger">4</span></a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

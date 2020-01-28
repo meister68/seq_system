@@ -33,7 +33,8 @@ class HomeController extends Controller
         session(['id' => $id, 'email' => $email]);
         $value = $request->session()->pull('email');
 
-        $post = Post::where('user_id',$id)->get();
+        // $post = Post::where('user_id',$id);
+        $post = Post::where("user_id", "=", $id)->get();
        // $post = Post::all();
         
         return view('home',compact('post','value'));
@@ -43,6 +44,14 @@ class HomeController extends Controller
     public function ask(){
         return view('askQuestion');
     }
+
+    // public function seeBody()
+    // {
+     
+       
+    //     $seeBody = Post::where("id")->get();
+    //     return view('comment');
+    // }
 
    
       
