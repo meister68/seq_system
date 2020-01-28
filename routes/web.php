@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/ask','HomeController@ask')->name('ask');
 Route::get('/search', 'SearchController@search')->name('search');
 
-// Route::get('/content','HomeController@seeBody')->name('seeBody');
+Route::get('/content','HomeController@seeBody')->name('seeBody');
 
 Route::prefix('post')->group( function() {
     Route::post('/', 'User\PostController@addPost')->name('addPost');
