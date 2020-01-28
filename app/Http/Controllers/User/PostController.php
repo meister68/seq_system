@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\User;
-
+use App\CustomClass\CRUD;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+
 
 class PostController extends Controller
 {
@@ -21,27 +22,31 @@ class PostController extends Controller
             'description' => 'test',
             'user_id' => 1,
         );
-        (new CrudController('Post'))->store($test_data);
+        (new CRUD('Post'))->store($test_data);
         return redirect('/home');
     }
 
     public function editPost($post_id)  
     {   
-        $post_id = 1;
-        $post = (new CrudController('Post'))->edit($post_id);
-        return $post;
-        
+        $post_id = 17;
+        $post = (new CRUD('Post'))->edit($post_id);
+        return $post;   
     }
 
-    public function update(Request $request, $post_id)
+    public function updatePost(Request $request, $post_id)
     {
-        Post::updatePost($request->title, $request->description, $post_id);
+        $data = array(
+            'title'=> $request->title,
+            'description'=> $request->description
+        );
+
+        (new CRUD('Post'))->update($data,$post_id);
         return redirect('/home');
     }
 
     public function removePost($post_id)
     {
-        Post::deletePost($post_id);
+        (new CRUD('Post'))->remove($post_id);
         return  redirect('/home');
     }
 }

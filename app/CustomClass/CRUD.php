@@ -1,14 +1,9 @@
 <?php
-
-namespace App\Http\Controllers\User;
-
-use Illuminate\Http\Request;
+namespace App\CustomClass;
 use App\Models;
-use App\Http\Controllers\Controller;
 
-class CrudController extends Controller
+class CRUD
 {
-
     public $model = 'App\\Models\\';
 
     public function __construct($model)
@@ -37,7 +32,7 @@ class CrudController extends Controller
             $data->description = $data['description'];
             $data->save();
         }else{
-            $data->description = $data['description'];
+            $data->body = $data['body'];
             $data->save();
         }
         return false;
@@ -49,8 +44,7 @@ class CrudController extends Controller
         $data = $this->model::find($id);
         $data->delete();
     }
-
-
-
-   
 }
+
+
+?>

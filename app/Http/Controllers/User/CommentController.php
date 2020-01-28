@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use Pusher\Pusher;
+use App\CustomClass\CRUD;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
@@ -39,30 +40,32 @@ class CommentController extends Controller
         // ]);
         $test_data = array(
             'title' => 'test',
-            'description' => 'test',
+            'body' => 'test',
             'user_id' => 1,
             'post_id' => 1
         );
-        //CrudController::store('Comment',$test_data);
+        (new CRUD('Comment'))->store($test_data);
         return 'added successfully';
       
     }
 
     public function editComment($comment_id)  
     {   
-        $comment = Comment::find($comment_id);
+        (new CRUD('Comment'))->edit($comment_id);
         return $comment_id;
     }
 
     public function update(Request $request, $comment_id)
     {
-        Post::updateComment( $request->description);
+        
+        $data = array('body' => $request->body);
+        (new CRUD('Comment'))->update($comment_id);
         return redirect('/home');
     }
 
     public function removePost($comment_id)
     {
-        Post::deleteComment($comment_id);
+        (new CRUD('Comment'))->remove($comment_id);
         return  redirect('/home');
     }
 
