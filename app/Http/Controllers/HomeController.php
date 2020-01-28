@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Model\Post;
+use App\Models\Post;
 use App;
 use App\Events\CommentEvent;
 
@@ -31,15 +31,26 @@ class HomeController extends Controller
         $id = $user->id;
         $email = $user->email;
         session(['id' => $id, 'email' => $email]);
-        // $value = $request->session()->pull('email');
+        $value = $request->session()->pull('email');
+
+        // $post = Post::where('user_id',$id);
+        $post = Post::where("user_id", "=", $id)->get();
+       // $post = Post::all();
         
         return view('home',compact('post','value'));
     
     }
-
     public function ask(){
 
         return view('askQuestion');
+    }
+
+    public function seeBody($id)
+    {
+        // $user = Auth::user();
+        // $id = $user->id;
+        $seeBody = Post::where("id", $id)->get();
+        return view('comment',compact('seeBody'));
     }
 
    

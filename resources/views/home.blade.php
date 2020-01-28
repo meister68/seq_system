@@ -15,9 +15,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                        <a href="">This is just a test</a>
+                    @foreach($post as $Post)
+                        <a href="{{ route('seeBody',$Post->id) }}"><h3>{{ $Post['title'] }}</h3></a>
                         <hr>
-                        <a href="">This is just a test</a>
+                    @endforeach
 
                 </div>
             </div>

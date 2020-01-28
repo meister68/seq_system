@@ -12,10 +12,11 @@ class PostController extends Controller
     //
     public function addPost(Request $request)
     {
-        // $validate_data = $request->validate([
-        //     'title' => 'required',
-        //     'description' => 'required'
-        // ]);
+        $validate_data = $request->validate([
+            'user_id' => 'required',
+            'title' => 'required',
+            'description' => 'required'
+        ]);
 
         $test_data = array(
             'title' => 'test',
@@ -49,4 +50,6 @@ class PostController extends Controller
         (new CRUD('Post'))->remove($post_id);
         return  redirect('/home');
     }
+
+    
 }
