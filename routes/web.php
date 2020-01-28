@@ -23,7 +23,7 @@ Route::get('notif', function () {
 //     return 'test';
 // });
 
-Route::get('/comment', 'User\CommentController@addComment');
+Route::any('/comment1', 'User\CommentController@addComment');
 
 Auth::routes();
 

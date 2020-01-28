@@ -11,7 +11,7 @@ use App\Models\Comment;
 
 class CommentController extends Controller
 {
-    public  function notify()
+    public  function notify($data)
     {
         $options = array(
             'cluster' => env('PUSHER_APP_CLUSTER'),
@@ -26,32 +26,34 @@ class CommentController extends Controller
             $options
         );
 
-        $test_data = array(
-            'title' => 'test',
-            'body' => 'test',
-            'user_id' => 1,
-            'post_id' => 1
-        );
-        $data['message'] = 'username commented on your post';
-        $pusher->trigger('test', 'App\\Events\\CommentEvent', $test_data);
-    }
-
-    public  function addComment(Request $request)
-    {
-        $validate_data = $request->validate([
-            'description' => 'required',
-            'user_id' => 'required',
-            'post_id' => 'required',
-            'status' => 'required|integer'
-        ]);
         // $test_data = array(
         //     'title' => 'test',
         //     'body' => 'test',
         //     'user_id' => 1,
         //     'post_id' => 1
         // );
+        $data['message'] = 'username commented on your post';
+        $pusher->trigger('test', 'App\\Events\\CommentEvent', $data);
+    }
+
+    public  function addComment(Request $request)
+    {
+        $request['status'] = 1;
+        // $validate_data = $request->validate([
+        //     'description' => 'required',
+        //     'user_id' => 'required',
+        //     'post_id' => 'required',
+        //     'status' => 'required|integer'
+        // ]);
+        $test_data = array(
+            'title' => 'test',
+            'body' => 'test',
+            'user_id' => 1,
+            'post_id' => 1
+        );
         (new CRUD('Comment'))->store($test_data);
-        return 'added successfully';
+        $this->notify($test_data);
+        return $request['status'];
       
     }
 
