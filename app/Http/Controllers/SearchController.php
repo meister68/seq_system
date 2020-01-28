@@ -11,15 +11,13 @@ class SearchController extends Controller
 {
     public function search(Request $request) {
         if(empty($request->name)) {
-            return redirect('/');
+            return redirect('/home');
         } else {
-            $posts = Post::query()
-            ->where('title', 'LIKE', "%{$request->name}%")->get();
-            // $user = User::whereName($request->name)->get();
-            return view('home',
+            // $name = explode(" ", $request->name);
+            // $data = [$request->name];
+            $posts = Post::whereIn('title', [$request->name])->orWhere('title', 'like', "%{$request->name}%")->get();
+            return view('home',['post'=> $posts]);
             // ['users' => $user],
-            ['post'=> $posts] 
-        );
         }
     }
 }
