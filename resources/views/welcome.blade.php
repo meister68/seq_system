@@ -27,7 +27,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <!-- <a href="{{ url('/home') }}">Home</a> -->
                     @else
                         <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('search')  }}" >
                         @csrf

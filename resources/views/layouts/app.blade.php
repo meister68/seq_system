@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/form.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -49,10 +50,10 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('search')}}">
+                        <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('search') }}">
                         @csrf
                             <input class="form-control mr-sm-2" type="text" name="name" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
                         </form>
                         @guest
                             <li class="nav-item">

@@ -29,28 +29,31 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $id = $user->id;
-        $email = $user->email;
-        session(['id' => $id, 'email' => $email]);
-        $value = $request->session()->pull('email');
+        session(['id' => $id]);
 
-        // $post = Post::where('user_id',$id);
-        $post = Post::where("user_id", "=", $id)->get();
-       // $post = Post::all();
+        //paginate for comments no next and prev yet
+        $post = Post::where("user_id", "=", $id)->latest()->paginate(2);
         
-        return view('home',compact('post','value'));
+        return view('home',compact('post'));
     
     }
-    
     public function ask(){
+
         return view('askQuestion');
     }
 
-    public function seeBody()
+    public function seeBody($id)
     {
-     
+        $sortDirection = 'desc';
+        $seeBody = Post::where("id", $id)
+        ->with(['comment.user' => function ($query) {
+               $query->latest();
+        }])->get();
+        
+        return view('comment',compact('seeBody'));
+        
        
-        $seeBody = Post::where("id")->get();
-        return view('comment');
+        //return $seeBody;
     }
 
    

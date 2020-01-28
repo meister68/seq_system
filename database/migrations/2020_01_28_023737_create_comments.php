@@ -18,7 +18,7 @@ class CreateComments extends Migration
             $table->integer('user_id')->references('id')->on('users');
             $table->integer('post_id')->references('id')->on('posts');
             $table->text('body');
-            $table->string('status');
+            $table->integer('status');
             $table->timestamps();
         });
 

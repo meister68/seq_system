@@ -8,33 +8,47 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                <center><h4>Ask a Question</h4></center>
+                
+                <center><h4>Find your Answer in your Question</h4></center>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body card example-1 scrollbar-ripe-malinka">
     
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    @foreach($seeBody as $Content)
+                
                         <div class="form-group">
-                            <label for="comment"><h3 class="font-weight-bold">Title</h3></label><br>
-                                <h3>{{ $Content['title'] }}</h3>
-                            <label for="comment"><h3 class="font-weight-bold">Body</h3></label>
-                                <h4>{{ $Content['description'] }}</h4>  
+                                <p class="font-weight-bold">{{ $seeBody[0]->title }}</p>
+                                <p>{{ $seeBody[0]['description'] }}</p>  
+                                <hr>
                         </div>
-                    @endforeach
-                        <button type="submit" class="btn-outline-success btn-lg float-right">Post</button>
-                 
                       
-                        
-                        <a href="{{ route('home') }}"><button type="submit" class="btn-outline-danger btn-lg ">Cancel</button></a>
-                   
+
+                        <!-- dre pag butang og foreach sa comment -->
+                        @foreach ($seeBody[0]->comment as $test)
+                             <div class="form-group">
+                             <p><strong>{{$test->body}}</strong></p>
+                                <p>{{$test->user->name}}</p>
+                            </div>   
+                        @endforeach                    
                 </div>
             </div>
+            <br>
+            <form>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="d-flex">
+                                <input class="form-control mr-1">
+                                <button class="btn btn-secondary">Answer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
