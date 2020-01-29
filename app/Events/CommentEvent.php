@@ -33,6 +33,9 @@ class CommentEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannels('test');
+        return [
+            new PrivateChannels('test'),
+            new PrivateChannels('test2')
+        ];
     }
 }

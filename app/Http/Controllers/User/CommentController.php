@@ -10,9 +10,10 @@ use App\Models\Comment;
 use Auth;
 
 
+
 class CommentController extends Controller
 {
-    public  function notify($data)
+    public  function notify($data, $username)
     {
         $options = array(
             'cluster' => env('PUSHER_APP_CLUSTER'),
@@ -26,14 +27,9 @@ class CommentController extends Controller
             env('PUSHER_APP_ID'), 
             $options
         );
+       
 
-        // $test_data = array(
-        //     'title' => 'test',
-        //     'body' => 'test',
-        //     'user_id' => 1,
-        //     'post_id' => 1
-        // );
-        $data['message'] = 'username commented on your post';
+        $data['message'] = $username.'commented on your post';
         $pusher->trigger('test', 'App\\Events\\CommentEvent', $data);
     }
 
@@ -48,15 +44,10 @@ class CommentController extends Controller
             'post_id' => 'required',
             'status' => 'required|integer'
         ]);
-        // $test_data = array(
-        //     'body' => '',
-        //     'user_id' => 1,
-        //     'post_id' => 1,
-        //     'status' => 0
-        // );
-        // dd($validate_data);
+
+
         (new CRUD('Comment'))->store($validate_data);
-        $this->notify($validate_data);
+        $this->notify($validate_data, Auth::user()->name);
         return redirect('/content/'.$validate_data['post_id']);
       
     }

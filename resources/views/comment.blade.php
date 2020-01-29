@@ -29,7 +29,7 @@
 
                         <!-- dre pag butang og foreach sa comment -->
                         @foreach ($seeBody[0]->comment as $test)
-                             <div class="form-group comments">
+                             <div class="form-group " id='comments'>
                              <p><strong>{{$test->user->name}}</strong></p>
                                 <p>{{$test->body}}</p>
                             </div>   
@@ -64,10 +64,19 @@
   
 <script>
 
+
     function test(data) 
     {
-        let comment = `<div><p>${data.title}</p></div>`
-        $('.comments').prepend(comment);
+       
+        let comment = `<div><p>${data.body}</p></div>`
+        $('#comments').prepend(comment);
+        console.log('first')
+    }
+
+    function test2(data){
+     let count = parseInt( $('#notifCount').text())
+    count+=1
+     $('#notifCount').text(count)
     }
 
     var pusher = new Pusher('59a1d10e99c58e2524f0',
@@ -77,9 +86,10 @@
     });
 
     var channel = pusher.subscribe('test');
-    channel.bind('App\\Events\\CommentEvent',function(){
-        console.log('test');
-    })
+    var channel2 = pusher.subscribe('test2');
+    channel.bind('App\\Events\\CommentEvent',test)
+    channel.bind('App\\Events\\CommentEvent', test2)
+    //test2();
 
 </script>
 
