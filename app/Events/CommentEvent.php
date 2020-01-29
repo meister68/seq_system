@@ -13,17 +13,17 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class CommentEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $username;
+    // public $username;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($username)
+    public function __construct()
     {
         //
-        $this->username = $username;
+        // $this->username = $username;
     }
 
     /**
@@ -33,6 +33,9 @@ class CommentEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannels('test');
+        return [
+            new PrivateChannels('test'),
+            new PrivateChannels('test2')
+        ];
     }
 }
