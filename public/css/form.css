@@ -11,8 +11,33 @@
 .card-body {
     border: 1px solid #436375;
 }
-#div{
+
+#div {
     margin-top: 6%;
+}
+
+#boxComment1 {
+    background-color:  #98FB98;
+    margin-bottom: 1%;
+    padding-right: 3%;
+    padding-left: 3%;
+}
+
+#boxComment2 {
+    background-color:  #B0C4DE;
+    margin-bottom: 1%;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+#userBody {
+    float:right;
+    margin-top:3%;
+}
+
+#nonUserBody {
+    float:left;
+    margin-top:3%;
 }
 /* end for form */
 

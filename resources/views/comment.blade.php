@@ -29,10 +29,21 @@
 
                         <!-- dre pag butang og foreach sa comment -->
                         @foreach ($seeBody[0]->comment as $test)
-                             <div class="form-group comments">
-                             <p><strong>{{$test->user->name}}</strong></p>
-                                <p>{{$test->body}}</p>
-                            </div>   
+                            @if(Auth::id()==$test->user->id)
+                                <div id="boxComment1">
+                                    <div class="form-group comments" >
+                                    <strong class="float-right text-justify">{{$test->user->name}}</strong>
+                                        <p id="userBody" class="text-justify">{{$test->body}}</p>
+                                    </div>  
+                                </div> 
+                                @else
+                                <div id="boxComment2">
+                                    <div class="form-group comments" >
+                                    <strong class="float-left text-justify">{{$test->user->name}}</strong>
+                                        <p id="nonUserBody" class="text-justify">{{$test->body}}</p>
+                                    </div>  
+                                </div> 
+                            @endif
                         @endforeach                    
                 </div>
             </div>
@@ -67,7 +78,7 @@
     function test(data) 
     {
         let comment = `<div><p>${data.title}</p></div>`
-        $('.comments').prepend(comment);
+        $('.comments').append(comment);
     }
 
     var pusher = new Pusher('59a1d10e99c58e2524f0',
@@ -77,8 +88,8 @@
     });
 
     var channel = pusher.subscribe('test');
-    channel.bind('App\\Events\\CommentEvent',function(){
-        console.log('test');
+    channel.bind('App\\Events\\CommentEvent',function(data){
+        console.log(data);
     })
 
 </script>

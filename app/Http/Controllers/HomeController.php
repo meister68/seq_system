@@ -42,17 +42,15 @@ class HomeController extends Controller
         return view('askQuestion');
     }
 
+    
     public function seeBody($id)
     {
         $sortDirection = 'desc';
         $seeBody = Post::where("id", $id)
         ->with(['comment.user' => function ($query) {
-               $query->latest();
+        $query->latest();
         }])->get();
-        
         return view('comment',compact('seeBody'));
-        
-       
         //return $seeBody;
     }
 

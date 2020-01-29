@@ -12,7 +12,7 @@ use Auth;
 
 class CommentController extends Controller
 {
-    public  function notify()
+    public  function notify($data)
     {
         $options = array(
             'cluster' => env('PUSHER_APP_CLUSTER'),
@@ -34,7 +34,7 @@ class CommentController extends Controller
         //     'post_id' => 1
         // );
         $data['message'] = 'username commented on your post';
-        $pusher->trigger('test', 'App\\Events\\CommentEvent', $data['message']);
+        $pusher->trigger('test', 'App\\Events\\CommentEvent', $data);
     }
 
     public  function addComment(Request $request)
