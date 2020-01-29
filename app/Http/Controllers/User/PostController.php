@@ -17,7 +17,7 @@ class PostController extends Controller
             'title' => 'required',
             'description' => 'required'
         ]);
-        dd($validate_data);
+        // dd($validate_data);
 
         (new CRUD('Post'))->store($request->all());
         return redirect('/home');

@@ -13,7 +13,7 @@ use Auth;
 
 class CommentController extends Controller
 {
-    public  function notify($data, $username)
+    public  function notify($data)
     {
         $options = array(
             'cluster' => env('PUSHER_APP_CLUSTER'),
@@ -29,7 +29,7 @@ class CommentController extends Controller
         );
        
 
-        $data['message'] = $username.'commented on your post';
+        $data['message'] = $data['username'].'commented on your post';
         $pusher->trigger('test', 'App\\Events\\CommentEvent', $data);
     }
 
@@ -47,7 +47,8 @@ class CommentController extends Controller
 
 
         (new CRUD('Comment'))->store($validate_data);
-        $this->notify($validate_data, Auth::user()->name);
+        $validate_data['username'] = Auth::user()->name;
+        $this->notify($validate_data);
         return redirect('/content/'.$validate_data['post_id']);
       
     }

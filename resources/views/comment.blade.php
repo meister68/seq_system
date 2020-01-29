@@ -55,7 +55,7 @@
                         <div class="container">
                             <div class="d-flex">
                                 <input type="hidden" value="{{$seeBody[0]->id}}" name="post_id"> 
-                                <input class="form-control mr-1" name="body">
+                                <input type="text" class="form-control mr-1" name="body">
                                 <button class="btn btn-secondary">Answer</button>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
 
     function test(data) 
     {
-        let comment = `<div><p>${data.title}</p></div>`
+        let comment = `<div><p>${data.body}</p><p>${data.username}</p></div>`
         $('.comments').append(comment);
        
 

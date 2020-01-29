@@ -39,9 +39,9 @@ class HomeController extends Controller
                $query->where('status', 0);
         }])->get();
          
-        return count($unread_comment_count[0]->comment);
+        // return count($unread_comment_count[0]->comment);
         
-        //return view('home',compact('post'));
+        return view('home',compact('post'));
     
     }
     public function ask(){
