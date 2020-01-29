@@ -19,7 +19,12 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+       
+       
+        
+        
     }
+
 
     /**
      * Show the application dashboard.
@@ -28,20 +33,20 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $user = Auth::user();
-        $id = $user->id;
-        session(['id' => $id]);
+        $id = Auth::user()->id;
+    
+        //return count($test->comment);
 
         //paginate for comments no next and prev yet
         $post = Post::where("user_id", "=", $id)->latest()->paginate(2);
-        $unread_comment_count = Post::where("user_id", $id)
-        ->with(['comment' => function ($query) {
-               $query->where('status', 0);
-        }])->get();
-         
-        return count($unread_comment_count[0]->comment);
-        
-        //return view('home',compact('post'));
+        $test = Post::where("user_id",Auth::id())
+            ->with(['comment' => function ($query) {
+                   $query->where('status',1);
+            }])->get();
+        view()->share('key', count($test[0]->comment));
+        //return $test;
+        return view('home',compact('post'));
+
     
     }
     public function ask(){
@@ -63,6 +68,9 @@ class HomeController extends Controller
         //return $seeBody;
     }
 
+   
+
+  
    
       
 

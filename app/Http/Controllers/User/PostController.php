@@ -18,7 +18,8 @@ class PostController extends Controller
             'description' => 'required'
         ]);
 
-        (new CRUD('Post'))->store($request->all());
+        $validate_data['user_id'] = $request->user()->id;
+        (new CRUD('Post'))->store($validate_data);
         return redirect('/home');
     }
 
