@@ -7,6 +7,7 @@ use App\CustomClass\CRUD;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use Auth;
 
 
 class CommentController extends Controller
@@ -17,7 +18,7 @@ class CommentController extends Controller
             'cluster' => env('PUSHER_APP_CLUSTER'),
             'encrypted' => true
         
-        );
+        );      
 
         $pusher = new Pusher(
             env('PUSHER_APP_KEY'),
@@ -39,21 +40,24 @@ class CommentController extends Controller
     public  function addComment(Request $request)
     {
         $request['status'] = 1;
-        // $validate_data = $request->validate([
-        //     'description' => 'required',
-        //     'user_id' => 'required',
-        //     'post_id' => 'required',
-        //     'status' => 'required|integer'
-        // ]);
-        $test_data = array(
-            'title' => 'test',
-            'body' => 'test',
-            'user_id' => 1,
-            'post_id' => 1
-        );
-        (new CRUD('Comment'))->store($test_data);
-        $this->notify($test_data);
-        return $request['status'];
+        $request['user_id']=Auth::id();
+        // dd($request->all());
+        $validate_data = $request->validate([
+            'body' => 'required',
+            'user_id' => 'required',
+            'post_id' => 'required',
+            'status' => 'required|integer'
+        ]);
+        // $test_data = array(
+        //     'body' => '',
+        //     'user_id' => 1,
+        //     'post_id' => 1,
+        //     'status' => 0
+        // );
+        // dd($validate_data);
+        (new CRUD('Comment'))->store($validate_data);
+        $this->notify($validate_data);
+        return redirect('/content/'.$validate_data['post_id']);
       
     }
 

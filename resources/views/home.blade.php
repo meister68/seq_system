@@ -17,7 +17,7 @@
                     @endif
                     @foreach($post as $Post)
                     <hr>
-                        <a href="{{ route('seeBody',$Post->id) }}"><h3>{{ $Post['title'] }}</h3></a>
+                        <a href="{{ route('seeBody',$Post->id) }}"><h6>{{ $Post['title'] }}</h6 ></a>
                         <hr>
                     @endforeach
 
