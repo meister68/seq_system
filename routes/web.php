@@ -36,9 +36,9 @@ Route::get('/content/{id}','HomeController@seeBody')->name('seeBody');
 
 Route::prefix('post')->group( function() {
     Route::post('/', 'User\PostController@addPost')->name('addPost');
-    Route::get('/edit/{id}', 'User\PostController@editPost');
-    Route::get('update/{id}', 'User\PostController@update');
-    Route::get('delete/{id}', 'User\PostController@removePost');
+    Route::get('/edit/{id}', 'User\PostController@editPost')->name('editPost');
+    Route::get('update/{id}', 'User\PostController@updatePost')->name('updatePost');
+    Route::get('delete/{id}', 'User\PostController@removePost')->name('deletePost');
 });
 
 Route::prefix('comment')->group( function() {

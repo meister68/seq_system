@@ -40,4 +40,11 @@
     overflow-y: scroll;
     height: 380px; 
 }
+#dropdown{
+    margin-top:-40px;
+    
+}
+#edit{
+    margin-left: 15px;
+}
 /* end for autoscroll */

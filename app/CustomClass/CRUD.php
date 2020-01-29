@@ -32,7 +32,7 @@ class CRUD
             $data->description = $data['description'];
             $data->save();
         }else{
-            $data->body = $data['body'];
+            $data->description = $data['description'];
             $data->save();
         }
         return false;
