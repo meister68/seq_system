@@ -75,10 +75,19 @@
   
 <script>
 
+
     function test(data) 
     {
         let comment = `<div><p>${data.title}</p></div>`
         $('.comments').append(comment);
+       
+
+    }
+
+    function test2(data){
+     let count = parseInt( $('#notifCount').text())
+    count+=1
+     $('#notifCount').text(count)
     }
 
     var pusher = new Pusher('59a1d10e99c58e2524f0',
@@ -88,9 +97,10 @@
     });
 
     var channel = pusher.subscribe('test');
-    channel.bind('App\\Events\\CommentEvent',function(data){
-        console.log(data);
-    })
+    var channel2 = pusher.subscribe('test2');
+    channel.bind('App\\Events\\CommentEvent',test)
+    channel.bind('App\\Events\\CommentEvent', test2)
+    //test2();
 
 </script>
 
