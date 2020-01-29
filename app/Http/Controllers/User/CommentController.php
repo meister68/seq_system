@@ -11,7 +11,7 @@ use App\Models\Comment;
 
 class CommentController extends Controller
 {
-    public  function notify($data)
+    public  function notify()
     {
         $options = array(
             'cluster' => env('PUSHER_APP_CLUSTER'),
@@ -33,7 +33,7 @@ class CommentController extends Controller
         //     'post_id' => 1
         // );
         $data['message'] = 'username commented on your post';
-        $pusher->trigger('test', 'App\\Events\\CommentEvent', $data);
+        $pusher->trigger('test', 'App\\Events\\CommentEvent', $data['message']);
     }
 
     public  function addComment(Request $request)
@@ -54,8 +54,8 @@ class CommentController extends Controller
         $request['test'] = 'test';
         //dd($request->user()->id);
         (new CRUD('Comment'))->store($test_data);
-        $this->notify($test_data);
-        return $request['status'];
+        $this->notify();
+        return redirect('/comment');
       
     }
 
