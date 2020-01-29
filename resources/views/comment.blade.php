@@ -12,7 +12,7 @@
                 <center><h4>Find your Answer in your Question</h4></center>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body card example-1 scrollbar-ripe-malinka">
     
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -20,31 +20,67 @@
                         </div>
                     @endif
                 
-                    
-                        <!-- sample sa pagkuha sa relationship -->
-                          <!-- echo $seeBody->comment -->
                         <div class="form-group">
-                            <label for="comment"><h5 class="font-weight-bold">Title</h5></label>
-                                <p>{{ $seeBody[0]->title }}</p>
-                            <label for="comment"><h6 class="font-weight-bold">Body</h6></label>
+                                <p class="font-weight-bold">{{ $seeBody[0]->title }}</p>
                                 <p>{{ $seeBody[0]['description'] }}</p>  
+                                <hr>
                         </div>
+                      
 
                         <!-- dre pag butang og foreach sa comment -->
                         @foreach ($seeBody[0]->comment as $test)
-                             <div class="form-group">
-                             <p><strong>{{$test->body}}</strong></p>
-                                <p>{{$test->user->name}}</p>
+                             <div class="form-group comments">
+                             <p><strong>{{$test->user->name}}</strong></p>
+                                <p>{{$test->body}}</p>
                             </div>   
                         @endforeach                    
-                      
-                        
-                        <input  id="comment_box" type="text" value="your comment" />
-                        <input  id="comment_submit" type="submit" value="Submit" />
-                   
                 </div>
             </div>
+            <br>
+            <form action="{{ route('addComment') }}" method="POST">
+            @csrf 
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="d-flex">
+                                <input type="hidden" value="{{$seeBody[0]->id}}" name="post_id"> 
+                                <input class="form-control mr-1" name="body">
+                                <button class="btn btn-secondary">Answer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+
+ <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+ <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script> 
+  
+<script>
+
+    function test(data) 
+    {
+        let comment = `<div><p>${data.title}</p></div>`
+        $('.comments').prepend(comment);
+    }
+
+    var pusher = new Pusher('59a1d10e99c58e2524f0',
+    {
+        cluster: 'ap1',
+        encrypted: true
+    });
+
+    var channel = pusher.subscribe('test');
+    channel.bind('App\\Events\\CommentEvent',function(){
+        console.log('test');
+    })
+
+</script>
+
 @endsection
