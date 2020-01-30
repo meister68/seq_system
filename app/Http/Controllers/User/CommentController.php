@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Pusher\Pusher;
 use App\CustomClass\CRUD;
+use App\CustomClass\PusherSetup;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
@@ -15,21 +16,11 @@ class CommentController extends Controller
 {
     public  function notify($data)
     {
-        $options = array(
-            'cluster' => env('PUSHER_APP_CLUSTER'),
-            'encrypted' => true
-        
-        );      
-
-        $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'), 
-            $options
-        );
+        $pusher = PusherSetUp::getPusher();
+      
         $data['message'] = $data['username'].'commented on your post';
         $pusher->trigger('post'.$data['post_id'], 'App\\Events\\CommentEvent', $data);
-        $pusher->trigger('user'.$data['user_id'], 'App\\Events\\NotificationEvent', $data);
+        $pusher->trigger('user'.session('posted_by'), 'App\\Events\\NotificationEvent', $data);
     }
 
     public  function addComment(Request $request)
@@ -68,6 +59,7 @@ class CommentController extends Controller
     {
         (new CRUD('Comment'))->remove($comment_id);
         return  redirect('/home');
+        
     }
 
 

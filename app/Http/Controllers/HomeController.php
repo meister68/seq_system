@@ -54,14 +54,13 @@ class HomeController extends Controller
     {
         $sortDirection = 'desc';
         $seeBody = Post::where("id", $post_id)->with(['comment.user' => function ($query) {$query->latest();}])->get();
-        
-        Comment::where('post_id', $post_id)->update(['status' => 0]);
+        Comment::where('post_id', $post_id)->update(['status' => 1]);
         $unread_comment = Post::where("user_id",Auth::id())->with(['comment' => function ($query) {$query->where('status',0);}])->get();
-        session(['count' => count($unread_comment[0]->comment), 'post_id' => $post_id ]); //di maabot ang event.
+        session(['count' => count($unread_comment[0]->comment), 'post_id' => $post_id, 'posted_by'=> $seeBody[0]->user_id ]);
         return view('comment',compact('seeBody'));
 
         
-       
+       //broadcast sa post author
     }
 
    

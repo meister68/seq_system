@@ -29,7 +29,7 @@
 
                         <!-- dre pag butang og foreach sa comment -->
                         @foreach ($seeBody[0]->comment as $test)
-                             <div class="form-group " id='comments'>
+                             <div class="form-group " id='comments' id='comment_id'>
                              <p><strong>{{$test->user->name}}</strong></p>
                                 <p>{{$test->body}}</p>
                             </div>   
@@ -69,26 +69,29 @@
         cluster: 'ap1',
         encrypted: true
     });
+    
+    var channel = pusher.subscribe('post'+post_id);
+    channel.bind('App\\Events\\CommentEvent',addComment)
+
+    var channel2 = pusher.subscribe('user'+user_id);
+    channel2.bind('App\\Events\\NotificationEvent',sendNotification)
 
     function addComment(data) 
     {
         let comment = `<div> <p><strong>${data.username}</strong></p> <p>${data.body}</p></div>`
         $('#comments').append(comment);
-        
     }
 
     function sendNotification(data){
         let count = parseInt( $('#notifCount').text())
         count+=1
         $('#notifCount').text(count)
-    }
+        //console.log('test noti event')
+    } 
 
    
-    var channel = pusher.subscribe('post'+post_id);
-    channel.bind('App\\Events\\CommentEvent',addComment)
 
-    var channel2 = pusher.subscribe('user'+user_id);
-    channel2.bind('App\\Events\\NotificationEvent',sendNotification)
+    
     
 
 </script>

@@ -10,18 +10,20 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class NotificationEvent
+class DeleteCommentEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $user_id;
+    public $post_id;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($user_id)
+    public function __construct($post_id)
     {
-        $this->user_id = $user_id;
+        //
+        $this->post_id = $post_id;
+
     }
 
     /**
@@ -31,6 +33,6 @@ class NotificationEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('user'.$this->user_id);
+        return new PrivateChannel('post'.$post_id);
     }
 }
