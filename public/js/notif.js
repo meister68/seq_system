@@ -15,23 +15,6 @@ function test(data)
     }
 }
 
-// function test2(data) 
-// {
-//     let count = parseInt($('#notifCount').text())
-//     count += 1
-//     $('#notifCount').text(count)
-// }
-
-// var pusher = new Pusher('59a1d10e99c58e2524f0', {
-//     cluster: 'ap1',
-//     encrypted: true
-// });
-
-// var channel = pusher.subscribe('test');
-// var channel2 = pusher.subscribe('test2');
-// channel.bind('App\\Events\\CommentEvent', test)
-// channel.bind('App\\Events\\CommentEvent', test2)
-
 
 
 function sendNotification(data){
