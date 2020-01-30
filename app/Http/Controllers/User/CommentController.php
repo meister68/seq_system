@@ -37,7 +37,6 @@ class CommentController extends Controller
     {
         $request['status'] = 1;
         $request['user_id']=Auth::id();
-        // dd($request->all());
         $validate_data = $request->validate([
             'body' => 'required',
             'user_id' => 'required',
