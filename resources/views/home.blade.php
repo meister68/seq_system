@@ -16,8 +16,19 @@
                     @endif
                     @foreach($post as $Post)
                     <hr>
-                        <a href="{{ route('seeBody',$Post->id) }}"><h6>{{ $Post['title'] }}</h6 ></a>
-                        <hr>
+                    
+                        <a href="{{ route('seeBody',$Post->id) }}"><h3>{{ $Post['title'] }}</h3></a>
+                        @if(Auth::id() == $Post->user_id)
+                            <div class="dropdown">
+                                <button id="dropdown" class="btn btn-outline-secondary dropdown-toggle float-right" type="button" data-toggle="dropdown">
+                                </button>
+                                <ul class="dropdown-menu">
+                                <a href="{{ route('editPost',['id' => $Post->id])}}"><button id="edit" class="btn btn-primary">Edit</button></a>
+                                <a href="{{ route('deletePost',$Post->id)}}"><button id="delete" class="btn btn-danger">Delete</button></a>
+                                </ul> 
+                            </div>
+                            <hr>
+                        @endif  
                     @endforeach
 
                 </div>

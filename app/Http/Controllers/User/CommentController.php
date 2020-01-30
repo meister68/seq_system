@@ -52,8 +52,9 @@ class CommentController extends Controller
 
     public function editComment($comment_id)  
     {   
-        (new CRUD('Comment'))->edit($comment_id);
-        return $comment_id;
+        $comment = (new CRUD('Comment'))->edit($comment_id);
+        // return $comment_id;
+        return view('editComment',compact('comment'));
     }
 
     public function update(Request $request, $comment_id)

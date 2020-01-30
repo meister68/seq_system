@@ -23,7 +23,7 @@
 }
 
 #boxComment1 {
-    background-color:  #98FB98;
+    background-color:  #edd9ff;
     margin-bottom: 1%;
     padding-right: 3%;
     padding-left: 3%;
@@ -70,5 +70,15 @@
     position: relative;
     overflow-y: scroll;
     height: 380px; 
+}
+#dropdown{
+    margin-top:-40px;
+    
+}
+#dropdown_comment{
+    margin-top:10px;
+}
+#edit{
+    margin-left: 15px;
 }
 /* end for autoscroll */

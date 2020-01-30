@@ -34,19 +34,26 @@ class CRUD
         return json_decode($data,true);
     }
 
-    public function update($data, $id)
-    {    
-        $data =  $this->model::where('id', $id);
-        if($this->model == 'Post')
+    public function update($request, $id)
+    {   
+        $data =  $this->model::find($id);
+
+        if($this->model == 'App\Models\Post')
         {  
-            $data->title = $data['title'];
-            $data->description = $data['description'];
+            // dd($data);
+            $data->title = $request->title;
+            $data->description = $request->description;
             $data->save();
-        }else{
+            // dd($data);
+        }
+        if($this->model == 'App\Models\Comment')
+        {
             $data->body = $data['body'];
             $data->save();
         }
-        return false;
+        return $data;
+        
+        // dd($data);
     }
 
     public function remove($id)

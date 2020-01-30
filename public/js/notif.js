@@ -1,6 +1,6 @@
-function test(data) 
+function addComment(data) 
 {
-    console.log("test");
+    // console.log("test");
     
     let comment = `<div id="commentId"><div class="form-group"><strong class="float-left text-justify">${data.username}</strong>
     <p id="nonUserBody" class="text-justify">${data.body}</p></div><br clear="all"/></div>`
@@ -15,7 +15,11 @@ function test(data)
     }
 }
 
-
+var pusher = new Pusher('59a1d10e99c58e2524f0',
+{
+    cluster: 'ap1',
+    encrypted: true
+});
 
 function sendNotification(data){
     let count = parseInt( $('#notifCount').text())

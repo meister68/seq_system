@@ -27,19 +27,29 @@ class PostController extends Controller
 
     public function editPost($post_id)  
     {   
-        $post_id = 17;
+        // $post_id = 17;
         $post = (new CRUD('Post'))->edit($post_id);
-        return redirect('/login');   
+        //  $post = $post;
+        // dd(count($post[0]));
+        // $post = json_encode($post);
+        // return $post;
+        //$data['post'] = $post;
+        //return $data;
+         return view('editPost',compact('post'));  
     }
 
-    public function updatePost(Request $request, $post_id)
+    public function updatePost(Request $request)
     {
-        $data = array(
-            'title'=> $request->title,
-            'description'=> $request->description
-        );
+        
+        // $data = array(
+        //     'title'=> $request->title,
+        //     'description'=> $request->description
+        // );
+        // dd($data);
 
-        (new CRUD('Post'))->update($data,$post_id);
+        $update = (new CRUD('Post'))->update($request,$request->id);
+        // dd($update);
+        $update->save();
         return redirect('/home');
     }
 
@@ -48,6 +58,8 @@ class PostController extends Controller
         (new CRUD('Post'))->remove($post_id);
         return  redirect('/home');
     }
+
+    
 
     
 }
