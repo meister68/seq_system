@@ -28,8 +28,8 @@ class CommentController extends Controller
             $options
         );
         $data['message'] = $data['username'].'commented on your post';
-        $pusher->trigger('user'.$data['user_id'], 'App\\Events\\CommentEvent', $data);
-        $pusher->trigger('post'.$data['post_id'], 'App\\Events\\NotificationEvent', $data);
+        $pusher->trigger('post'.$data['post_id'], 'App\\Events\\CommentEvent', $data);
+        $pusher->trigger('user'.$data['user_id'], 'App\\Events\\NotificationEvent', $data);
     }
 
     public  function addComment(Request $request)

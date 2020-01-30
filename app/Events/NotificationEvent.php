@@ -19,9 +19,9 @@ class NotificationEvent
      *
      * @return void
      */
-    public function __construct($post_id)
+    public function __construct($user_id)
     {
-        $this->post_id = $post_id;
+        $this->user_id = $user_id;
     }
 
     /**
@@ -31,6 +31,6 @@ class NotificationEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('post'.$this->post_id);
+        return new PrivateChannel('post'.$this->user_id);
     }
 }

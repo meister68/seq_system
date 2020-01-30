@@ -20,10 +20,10 @@ class CommentEvent
      *
      * @return void
      */
-    public function __construct($user_id)
+    public function __construct($post_id)
     {
         //
-        $this->user_id = $user_id;
+        $this->post_id = $post_id;
     }
 
     /**
@@ -35,6 +35,6 @@ class CommentEvent
     public function broadcastOn()
     {
         
-        return new PrivateChannels('user'.$this->user_id);
+        return new PrivateChannels('post'.$this->post_id);
     }
 }

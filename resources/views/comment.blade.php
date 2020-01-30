@@ -70,29 +70,26 @@
         encrypted: true
     });
 
-    function test(data) 
+    function addComment(data) 
     {
-       
         let comment = `<div> <p><strong>${data.username}</strong></p> <p>${data.body}</p></div>`
         $('#comments').append(comment);
         
     }
 
-    function test2(data){
+    function sendNotification(data){
         let count = parseInt( $('#notifCount').text())
         count+=1
         $('#notifCount').text(count)
-        console.log('test event')
     }
 
    
-    //notif for user
-    var channel = pusher.subscribe('user'+user_id);
-    channel.bind('App\\Events\\CommentEvent',test2)
-    var channel2 = pusher.subscribe('post'+post_id);
-    channel2.bind('App\\Events\\NotificationEvent',test)
-    //channel.bind('App\\Events\\CommentEvent', test2)
-    //test2();
+    var channel = pusher.subscribe('post'+post_id);
+    channel.bind('App\\Events\\CommentEvent',addComment)
+
+    var channel2 = pusher.subscribe('user'+user_id);
+    channel2.bind('App\\Events\\NotificationEvent',sendNotification)
+    
 
 </script>
 
