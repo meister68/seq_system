@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('test','User\CommentController@notify');
 Route::get('notif', function () {
-    return view('Notification');
+    return view('test');
 });
 // Route::get('/test2', function () {
 //     return 'test';
