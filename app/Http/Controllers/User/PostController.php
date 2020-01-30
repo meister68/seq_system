@@ -17,7 +17,7 @@ class PostController extends Controller
             'title' => 'required',
             'description' => 'required'
         ]);
-        dd($validate_data);
+        // dd($validate_data);
 
         (new CRUD('Post'))->store($request->all());
         return redirect('/home');
@@ -36,16 +36,18 @@ class PostController extends Controller
          return view('editPost',compact('post'));  
     }
 
-    public function updatePost(Request $request, $post_id)
+    public function updatePost(Request $request)
     {
         
-        $data = array(
-            'title'=> $request->title,
-            'description'=> $request->description
-        );
+        // $data = array(
+        //     'title'=> $request->title,
+        //     'description'=> $request->description
+        // );
         // dd($data);
 
-        (new CRUD('Post'))->update($data,$post_id);
+        $update = (new CRUD('Post'))->update($request,$request->id);
+        // dd($update);
+        $update->save();
         return redirect('/home');
     }
 

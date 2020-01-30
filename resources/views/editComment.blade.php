@@ -36,21 +36,8 @@
                                 <div id="boxComment1">
                                     <div class="form-group comments" >
                                     <strong class="float-right text-justify ">{{$test->user->name}}</strong>
-                                        <p id="userBody" class="text-justify">{{$test->body}}</p>
-                                        <div class="dropdown">
-                                            <button id="dropdown_comment" class="btn btn-outline-secondary dropdown-toggle float-left" type="button" data-toggle="dropdown">
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                            <a href="{{ route('deleteComment', $test->id)}}">
-                                                <span class="glyphicon glyphicon-trash">Delete</span>
-                                            </a>
-                                            <a href="{{ route('edit', $test->id)}}">
-                                                <span class="glyphicon glyphicon-edit" >Edit</span>
-                                            </a>
-                                                
-                                            </ul> 
-                                        </div>
-                                        
+                                    <input class="form-control mr-1" name="body" value="{{$test->body}}">
+                                    <a href="{{ route('editComment' )}}"></a><button class="btn btn-secondary">Answer</button>
                                     </div>  
                                 </div> 
                                 @else
@@ -65,7 +52,7 @@
                 </div>
             </div>
             <br>
-            <form action="{{ route('addComment') }}" method="POST">
+            <!-- <form action="{{ route('addComment') }}" method="POST">
             @csrf 
                 <div class="card">
                     <div class="card-body">
@@ -73,12 +60,12 @@
                             <div class="d-flex">
                                 <input type="hidden" value="{{$seeBody[0]->id}}" name="post_id"> 
                                 <input class="form-control mr-1" name="body">
-                                <button class="btn btn-secondary">Answer</button>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </form> -->
         </div>
     </div>
 </div>

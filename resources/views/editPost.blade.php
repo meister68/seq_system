@@ -17,15 +17,16 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form method="GET" action="{{ route('updatePost', $post['id'])}}" >
+                    <form method="post" action="{{ route('updatePost', $post['id'])}}" >
                         @csrf
+                        <input type="text" name="id" value="{{$post['id']}}" hidden>
                         <div class="form-group">
                             <label for="comment"><h3 class="font-weight-bold">Title</h3></label><br>
                                 <p>Be specific and imagine you are asking a question to another person</p>
                                 <input type="text" class="form-control form-control-lg" name="title" value="{{ old('title', $post['title']) }}"><hr>
                             <label for="comment"><h3 class="font-weight-bold">Body</h3></label>
                                 <p>Include all the information someone would need to answer your question</p>
-                                <textarea class="form-control" rows="5" id="comment" name="description" value="{{ old('description', $post['description']) }}"></textarea> 
+                                <textarea class="form-control" rows="5" id="comment" name="description" value="{{ old('description', $post['description']) }}">{{ $post['description'] }}</textarea> 
                                 <input type="hidden" value="{{session('id')}}" name="user_id">    
                         </div>
                         <button type="submit" class="btn-outline-success btn-lg float-right">Update</button>
