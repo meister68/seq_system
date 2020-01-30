@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\User;
+
 use App\CustomClass\CRUD;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -19,7 +20,8 @@ class PostController extends Controller
         ]);
         // dd($validate_data);
 
-        (new CRUD('Post'))->store($request->all());
+        $validate_data['user_id'] = $request->user()->id;
+        (new CRUD('Post'))->store($validate_data);
         return redirect('/home');
     }
 

@@ -16,6 +16,7 @@
     <script> var user_id = {{session('id')}}</script>
     <script src="{{ asset('js/notif.js') }}" defer></script>
     
+    <script> var post_id = {{session('post_id')}}</script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -75,7 +76,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item">Notification&nbsp;&nbsp;<span class="badge badge-pill badge-danger" id='notifCount'>4</span></a>
+                                    <a class="dropdown-item">Notification&nbsp;&nbsp;<span class="badge badge-pill badge-danger" id='notifCount'>{{session('count')}}</span></a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

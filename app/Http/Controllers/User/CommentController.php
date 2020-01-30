@@ -27,15 +27,14 @@ class CommentController extends Controller
             env('PUSHER_APP_ID'), 
             $options
         );
-       
-
         $data['message'] = $data['username'].'commented on your post';
-        $pusher->trigger('test', 'App\\Events\\CommentEvent', $data);
+        $pusher->trigger('post'.$data['post_id'], 'App\\Events\\CommentEvent', $data);
+        $pusher->trigger('user'.$data['user_id'], 'App\\Events\\NotificationEvent', $data);
     }
 
     public  function addComment(Request $request)
     {
-        $request['status'] = 1;
+        $request['status'] = 0;
         $request['user_id']=Auth::id();
         $validate_data = $request->validate([
             'body' => 'required',
@@ -44,9 +43,8 @@ class CommentController extends Controller
             'status' => 'required|integer'
         ]);
 
-
         (new CRUD('Comment'))->store($validate_data);
-        $validate_data['username'] = Auth::user()->name;
+        $validate_data['username'] =  Auth::user()->name;
         $this->notify($validate_data);
         return redirect('/content/'.$validate_data['post_id']);
       

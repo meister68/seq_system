@@ -10,20 +10,18 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class CommentEvent
+class NotificationEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $user_id;
-
+    public $post_id;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($post_id)
+    public function __construct($user_id)
     {
-        //
-        $this->post_id = $post_id;
+        $this->user_id = $user_id;
     }
 
     /**
@@ -31,10 +29,8 @@ class CommentEvent
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    //replace with user id to make a unique channel for post also
     public function broadcastOn()
     {
-        
-        return new PrivateChannels('post'.$this->post_id);
+        return new PrivateChannel('post'.$this->user_id);
     }
 }

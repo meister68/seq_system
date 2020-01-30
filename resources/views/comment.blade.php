@@ -49,6 +49,7 @@
                 </div>
             </div>
             <br>
+
             <form action="{{ route('addComment') }}" method="POST">
                 @csrf
                 <div class="card">
@@ -66,4 +67,4 @@
         </div>
     </div>
 </div>
-@endsection
+
