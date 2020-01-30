@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Comment;
 use App;
 use App\Events\CommentEvent;
+use View;
 
 class HomeController extends Controller
 {
@@ -35,34 +36,30 @@ class HomeController extends Controller
     {
         $id = Auth::user()->id;
     
-        //return count($test->comment);
 
         //paginate for comments no next and prev yet
         $post = Post::where("user_id", "=", $id)->latest()->paginate(2);
-        $test = Post::where("user_id",Auth::id())
-            ->with(['comment' => function ($query) {
-                   $query->where('status',1);
-            }])->get();
-        view()->share('key', count($test[0]->comment));
-        //return $test;
+        $test = Post::where("user_id",Auth::id())->with(['comment' => function ($query) {$query->where('status',1);}])->get();
+        session(['count' => count($test[0]->comment) ]);
         return view('home',compact('post'));
 
     
     }
     public function ask(){
-
+       
         return view('askQuestion');
     }
 
-    public function seeBody($id)
+    public function seeBody($post_id)
     {
         $sortDirection = 'desc';
-        $seeBody = Post::where("id", $id)
-        ->with(['comment.user' => function ($query) {
-               $query->latest();
-        }])->get();
-        
+        $seeBody = Post::where("id", $post_id)
+        ->with(['comment.user' => function ($query) {$query->latest();}])->get();
+        Comment::where('post_id', $post_id)->update(['status' => 0]);
+        $test = Post::where("user_id",Auth::id())->with(['comment' => function ($query) {$query->where('status',1);}])->get();
+        session(['count' => count($test[0]->comment) ]);
         return view('comment',compact('seeBody'));
+
         
        
         //return $seeBody;

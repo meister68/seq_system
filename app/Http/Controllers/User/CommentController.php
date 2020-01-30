@@ -35,7 +35,7 @@ class CommentController extends Controller
 
     public  function addComment(Request $request)
     {
-        $request['status'] = 1;
+        $request['status'] = 0;
         $request['user_id']=Auth::id();
         // dd($request->all());
         $validate_data = $request->validate([

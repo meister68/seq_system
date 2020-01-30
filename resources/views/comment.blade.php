@@ -68,9 +68,8 @@
     function test(data) 
     {
        
-        let comment = `<div><p>${data.body}</p></div>`
-        $('#comments').prepend(comment);
-        console.log('first')
+        let comment = `<div> <p><strong>${data.username}</strong></p> <p>${data.body}</p></div>`
+        $('#comments').append(comment);
     }
 
     function test2(data){
