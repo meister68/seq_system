@@ -39,8 +39,8 @@ class HomeController extends Controller
 
         //paginate for comments no next and prev yet
         $post = Post::where("user_id", "=", $id)->latest()->paginate(2);
-        $test = Post::where("user_id",Auth::id())->with(['comment' => function ($query) {$query->where('status',1);}])->get();
-        session(['count' => count($test[0]->comment) ]);
+        $unread_comment = Post::where("user_id",Auth::id())->with(['comment' => function ($query) {$query->where('status',1);}])->get();
+        session(['count' => count($unread_comment[0]->comment),'id' => $id ]);
         return view('home',compact('post'));
 
     
@@ -53,16 +53,15 @@ class HomeController extends Controller
     public function seeBody($post_id)
     {
         $sortDirection = 'desc';
-        $seeBody = Post::where("id", $post_id)
-        ->with(['comment.user' => function ($query) {$query->latest();}])->get();
+        $seeBody = Post::where("id", $post_id)->with(['comment.user' => function ($query) {$query->latest();}])->get();
+        
         Comment::where('post_id', $post_id)->update(['status' => 0]);
-        $test = Post::where("user_id",Auth::id())->with(['comment' => function ($query) {$query->where('status',1);}])->get();
-        session(['count' => count($test[0]->comment) ]);
+        $unread_comment = Post::where("user_id",Auth::id())->with(['comment' => function ($query) {$query->where('status',1);}])->get();
+        session(['count' => count($unread_comment[0]->comment), 'post_id' => $post_id ]); //di maabot ang event.
         return view('comment',compact('seeBody'));
 
         
        
-        //return $seeBody;
     }
 
    

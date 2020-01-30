@@ -37,6 +37,7 @@
                 </div>
             </div>
             <br>
+
             <form action="{{ route('addComment') }}" method="POST">
             @csrf 
                 <div class="card">
@@ -61,33 +62,36 @@
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script> 
-  
-<script>
 
+<script>
+     var pusher = new Pusher('59a1d10e99c58e2524f0',
+    {
+        cluster: 'ap1',
+        encrypted: true
+    });
 
     function test(data) 
     {
        
         let comment = `<div> <p><strong>${data.username}</strong></p> <p>${data.body}</p></div>`
         $('#comments').append(comment);
+        
     }
 
     function test2(data){
-     let count = parseInt( $('#notifCount').text())
-    count+=1
-     $('#notifCount').text(count)
+        let count = parseInt( $('#notifCount').text())
+        count+=1
+        $('#notifCount').text(count)
+        console.log('test event')
     }
 
-    var pusher = new Pusher('59a1d10e99c58e2524f0',
-    {
-        cluster: 'ap1',
-        encrypted: true
-    });
-
-    var channel = pusher.subscribe('test');
-    var channel2 = pusher.subscribe('test2');
-    channel.bind('App\\Events\\CommentEvent',test)
-    channel.bind('App\\Events\\CommentEvent', test2)
+   
+    //notif for user
+    var channel = pusher.subscribe('user'+user_id);
+    channel.bind('App\\Events\\CommentEvent',test2)
+    var channel2 = pusher.subscribe('post'+post_id);
+    channel2.bind('App\\Events\\NotificationEvent',test)
+    //channel.bind('App\\Events\\CommentEvent', test2)
     //test2();
 
 </script>

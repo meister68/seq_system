@@ -31,6 +31,6 @@ class NotificationEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('post'.$this->post_id);
     }
 }

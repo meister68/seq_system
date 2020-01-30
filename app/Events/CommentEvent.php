@@ -34,9 +34,7 @@ class CommentEvent
     //replace with user id to make a unique channel for post also
     public function broadcastOn()
     {
-        return [
-            new PrivateChannels('test'),
-            new PrivateChannels('test2')
-        ];
+        
+        return new PrivateChannels('user'.$this->user_id);
     }
 }
