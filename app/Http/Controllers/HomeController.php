@@ -40,7 +40,13 @@ class HomeController extends Controller
         //paginate for comments no next and prev yet
         $post = Post::where("user_id", "=", $id)->latest()->paginate(2);
         $unread_comment = Post::where("user_id",Auth::id())->with(['comment' => function ($query) {$query->where('status',1);}])->get();
-        session(['count' => count($unread_comment[0]->comment),'id' => $id ]);
+        if(count($unread_comment) != 0)
+        {
+            $count = count($unread_comment) ;
+        }else{
+            $count = 0;
+        }
+        session(['count' => $count,'id' => $id, 'post_id' => 0 ]);
         return view('home',compact('post'));
 
     
@@ -56,11 +62,20 @@ class HomeController extends Controller
         $seeBody = Post::where("id", $post_id)->with(['comment.user' => function ($query) {$query->latest();}])->get();
         Comment::where('post_id', $post_id)->update(['status' => 1]);
         $unread_comment = Post::where("user_id",Auth::id())->with(['comment' => function ($query) {$query->where('status',0);}])->get();
-        session(['count' => count($unread_comment[0]->comment), 'post_id' => $post_id, 'posted_by'=> $seeBody[0]->user_id ]);
+        //return $unread_comment;
+        if(count($unread_comment) == 0)
+        {
+            $count = 0;
+            //return "true";
+        }else{
+            //return "false";
+            $count = count($unread_comment[0]->comment);
+        }
+        session(['count' => $count, 'post_id' => $post_id, 'posted_by'=> $seeBody[0]->user_id ]);
         return view('comment',compact('seeBody'));
 
         
-       //broadcast sa post author
+       
     }
 
    
