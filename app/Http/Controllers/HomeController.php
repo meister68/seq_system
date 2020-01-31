@@ -39,10 +39,10 @@ class HomeController extends Controller
 
         //paginate for comments no next and prev yet
         $post = Post::where("user_id", "=", $id)->latest()->paginate(2);
-        $unread_comment = Post::where("user_id",Auth::id())->with(['comment' => function ($query) {$query->where('status',1);}])->get();
+        $unread_comment = Post::where("user_id",Auth::id())->with(['comment' => function ($query) {$query->where('status',0);}])->get();
         if(count($unread_comment) != 0)
         {
-            $count = count($unread_comment) ;
+            $count = count($unread_comment[0]->comment);
         }else{
             $count = 0;
         }

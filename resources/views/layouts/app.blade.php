@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'SEQ') }}</title>
+    <!-- <title>{{ config('app.name', 'SEQ') }}</title> -->
+    <title>SEQ</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -16,7 +17,6 @@
     <script> var user_id = {{session('id')}}</script>
     <script> var post_id = {{session('post_id')}}</script>
     <script> var count = {{session('count')}}</script>
-   
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -30,9 +30,10 @@
     <!-- Scripts -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="//js.pusher.com/3.1/pusher.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script> 
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+
     
 </head>
 <body>
@@ -78,7 +79,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" id="test">Notification&nbsp;&nbsp;<span class="badge badge-pill badge-danger" id='notifCount'>{{session('count')}}</span></a>
+                                    <a class="dropdown-item">Notification&nbsp;&nbsp;<span class="badge badge-pill badge-danger" id='notifCount'>{{session('count')}}</span></a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -96,19 +97,10 @@
                 </div>
             </div>
         </nav>
-</div>
-      
+
         <main class="py-4">
             @yield('content')
         </main>
     </div>
-   
 </body>
-
-<script>
-
-
-</script>
-
-
 </html>

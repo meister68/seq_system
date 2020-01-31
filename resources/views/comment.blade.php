@@ -34,7 +34,6 @@
                         <div class="form-group">
                             <strong class="float-right text-justify">{{$test->user->name}}</strong>
                             <p id="userBody" class="text-justify">{{$test->body}}</p>
-                         
                         </div>
                     </div>
                     @else

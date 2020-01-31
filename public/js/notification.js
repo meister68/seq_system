@@ -1,19 +1,15 @@
 
  
-//  $(document).ready(function(){
-//     if(count == 0){
-//         $('#notifCount').text('')
-//         console.log(count)
-//     }else{
-//         console.log(count)
-//         $('#notifCount').text(count)
-//     }
-// }); 
+$(document).ready(function(){
+    if(count == 0){
+        $('#notifCount').text('')
+       
+    }
+}); 
  
 
 function addComment(data) 
 {
-    
     
     let comment = `<div id="commentId"><div class="form-group"><strong class="float-left text-justify">${data.username}</strong>
     <p id="nonUserBody" class="text-justify">${data.body}</p></div><br clear="all"/></div>`
@@ -36,6 +32,9 @@ var pusher = new Pusher('59a1d10e99c58e2524f0',
 
 function sendNotification(){
     let count = parseInt( $('#notifCount').text())
+    if(isNaN(count)){
+        count = 0
+    }
     count+=1
     $('#notifCount').text(count)
 }
