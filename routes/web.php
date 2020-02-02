@@ -46,7 +46,7 @@ Route::prefix('comment')->group( function() {
     Route::any('/', 'User\CommentController@addComment')->name('addComment');
     Route::get('/edit/{id}', 'User\CommentController@editComment')->name('edit');
     Route::get('update/{id}', 'User\CommentController@update')->name('update');
-    Route::get('delete/{id}', 'User\CommentController@removePost')->name('deleteComment');
+    Route::get('delete/{id}', 'User\CommentController@removeComment')->name('deleteComment');
 });
 
 

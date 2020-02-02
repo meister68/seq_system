@@ -10,17 +10,7 @@ class CRUD
     public function __construct($model)
     {
         $this->model .= $model;
-        //view()->share('key', $this->get());
     }
-
-    // public function get()
-    // {
-    //     $test = Post::where("user_id",Auth::id())
-    //     ->with(['comment' => function ($query) {
-    //            $query->where('status',0);
-    //     }])->get();
-    //     return 1;//count($test[0]->comment);
-    // }
 
     public  function store($data)
     {
@@ -40,11 +30,9 @@ class CRUD
 
         if($this->model == 'App\Models\Post')
         {  
-            // dd($data);
             $data->title = $request->title;
             $data->description = $request->description;
             $data->save();
-            // dd($data);
         }
         if($this->model == 'App\Models\Comment')
         {
@@ -58,7 +46,6 @@ class CRUD
 
     public function remove($id)
     {
-        //to be revised
         $data = $this->model::find($id);
         $data->delete();
     }

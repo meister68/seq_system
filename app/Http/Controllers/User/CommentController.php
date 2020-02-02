@@ -53,7 +53,6 @@ class CommentController extends Controller
     public function editComment($comment_id)  
     {   
         $comment = (new CRUD('Comment'))->edit($comment_id);
-        // return $comment_id;
         return view('editComment',compact('comment'));
     }
 
@@ -65,10 +64,25 @@ class CommentController extends Controller
         return redirect('/home');
     }
 
-    public function removePost($comment_id)
+    public function removeComment($data)
     {
+        $options = array(
+            'cluster' => env('PUSHER_APP_CLUSTER'),
+            'encrypted' => true
+        
+        );    
+
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'), 
+            $options
+        );
+        $pusher->trigger('postComment'.$data['comment_id'], 'App\\Events\\DeletePostCommentEvent', $data);
+
         (new CRUD('Comment'))->remove($comment_id);
-        return  redirect('/home');
+        return redirect('/content/'.session('post_id'));
+        
     }
 
 

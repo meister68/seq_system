@@ -27,9 +27,16 @@ function sendNotification(data){
     $('#notifCount').text(count)
 }
 
+// function delete(id) 
+// {
+    
+// }
 
 var channel = pusher.subscribe('post'+post_id);
 channel.bind('App\\Events\\CommentEvent',addComment)
 
 var channel2 = pusher.subscribe('user'+user_id);
 channel2.bind('App\\Events\\NotificationEvent',sendNotification)
+
+var channel3 = pusher.subscribe('postComment'+comment_id);
+// channel3.bind('App\\Events\\DeletePostCommentEvent',delete)  
