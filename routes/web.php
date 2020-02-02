@@ -33,6 +33,7 @@ Route::get('/ask','HomeController@ask')->name('ask');
 Route::get('/search', 'SearchController@search')->name('search');
 
 Route::get('/content/{id}','HomeController@seeBody')->name('seeBody');
+Route::get('/notification', 'HomeController@showNotifications')->name('user.notification');
 
 Route::prefix('post')->group( function() {
     Route::post('/', 'User\PostController@addPost')->name('addPost');

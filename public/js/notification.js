@@ -6,8 +6,6 @@ $(document).ready(function(){
        
     }
 }); 
- 
-
 function addComment(data) 
 {
     
@@ -45,6 +43,5 @@ channel.bind('App\\Events\\CommentEvent',addComment)
 
 var channel2 = pusher.subscribe('user'+user_id);
 channel2.bind('App\\Events\\NotificationEvent',sendNotification)
-
 
 

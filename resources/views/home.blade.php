@@ -14,7 +14,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                   
                     @foreach($post as $Post)
                         <hr>
                         <a href="{{ route('seeBody',$Post->id) }}"><h6>{{ $Post['title'] }}</h6 ></a>

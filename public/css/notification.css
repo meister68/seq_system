@@ -11,6 +11,11 @@ a{
 }
 a:hover{
     text-decoration: none;
+   
+}
+.list-group-item:hover{
+    /* background-color: gray; */
+    color: black;
 }
 
 .notification{

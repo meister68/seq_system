@@ -13,11 +13,14 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/checker.js') }}" ></script>
+    <script> 
+        var user_id = checker({{session('id')}})
+        var post_id = checker({{session('post_id')}})
+        var count = checker({{session('count')}})
+    </script>
     <script src="{{ asset('js/notification.js') }}" defer></script>
-    <script> var user_id = {{session('id')}}</script>
-    <script> var post_id = {{session('post_id')}}</script>
-    <script> var count = {{session('count')}}</script>
-
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -79,7 +82,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item">Notification&nbsp;&nbsp;<span class="badge badge-pill badge-danger" id='notifCount'>{{session('count')}}</span></a>
+                                    <a href="{{route('user.notification')}}" class="dropdown-item">Notification&nbsp;&nbsp;<span class="badge badge-pill badge-danger" id='notifCount'>{{session('count')}}</span></a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
