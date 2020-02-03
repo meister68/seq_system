@@ -37,7 +37,6 @@ function sendNotification(){
     $('#notifCount').text(count)
 }
 
-
 var channel = pusher.subscribe('post'+post_id);
 channel.bind('App\\Events\\CommentEvent',addComment)
 

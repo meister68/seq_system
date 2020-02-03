@@ -18,6 +18,10 @@
         @endforeach
 
     </ul>
+    
+    <br><button class="btn-danger" type="button">Clear Notification</button>
+   
+
 
 </div>
 
