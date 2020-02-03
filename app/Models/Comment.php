@@ -12,6 +12,7 @@ class Comment extends Model
         'body',
         'status'
     ];
+    protected $dates = ['created_at'];
 
     public function post()
     {

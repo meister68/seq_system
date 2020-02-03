@@ -18,7 +18,6 @@ class CommentController extends Controller
     {
         $pusher = PusherSetUp::getPusher();
       
-        $data['message'] = $data['username'].'commented on your post';
         $pusher->trigger('post'.$data['post_id'], 'App\\Events\\CommentEvent', $data);
         $pusher->trigger('user'.session('posted_by'), 'App\\Events\\NotificationEvent', $data);
     }

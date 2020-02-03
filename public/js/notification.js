@@ -2,10 +2,19 @@
  
 $(document).ready(function(){
     if(count == 0){
-        $('#notifCount').text('')
-       
+        $('#notifCount').text('')   
     }
 }); 
+
+function getTimeStamp()
+ {
+     let timestamp = new Date(Date.now())
+     let date = timestamp.getDate() < 9 ? `0${timestamp.getDate()}` :  timestamp.getDate()
+     let month = timestamp.getMonth()+1 < 9 ? `0${timestamp.getMonth()+1}` :  timestamp.getMonth()+1
+     return `${date}-${month}-${timestamp.getFullYear()}` 
+ 
+ }
+
 function addComment(data) 
 {
     
@@ -28,13 +37,18 @@ var pusher = new Pusher('59a1d10e99c58e2524f0',
     encrypted: true
 });
 
-function sendNotification(){
+function sendNotification(data){
     let count = parseInt( $('#notifCount').text())
     if(isNaN(count)){
         count = 0
     }
     count+=1
+    let timestamp =  getTimeStamp()
     $('#notifCount').text(count)
+    let message = ` <li class="list-group-item list-group-item-secondary"> <a
+    href="/content/${data.post_id}"><strong><span>${data.username}</span></strong>
+    commented on your post</a><span class="timestamps">${timestamp}</span></li>`
+    $('.message').prepend(message)
 }
 
 

@@ -27,6 +27,7 @@ class CommentEventListener
      */
     public function handle(CommentEvent $event)
     {
+        dd($event);
         Log::info(json_encode($event));
     }
 }

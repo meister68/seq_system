@@ -13,20 +13,23 @@ class PostController extends Controller
     //
     public function addPost(Request $request)
     {
-        $validate_data = $request->validate([
-            'user_id' => 'required',
-            'title' => 'required',
-            'description' => 'required'
-        ]);
-
-        $validate_data['user_id'] = $request->user()->id;
-        (new CRUD('Post'))->store($validate_data);
+       try{
+            $validate_data = $request->validate([
+                'user_id' => 'required',
+                'body' => 'required',
+                'title' => 'required'
+            ]);
+            $validate_data['user_id'] = $request->user()->id;
+            (new CRUD('Post'))->store($validate_data);
+       }
+        catch(\Exception $er){
+            return redirect()->back()->withInput()->withErrors('errors','Something went wrong. Please try again later.');
+        }
         return redirect('/home');
     }
 
     public function editPost($post_id)  
     {   
-        $post_id = 17;
         $post = (new CRUD('Post'))->edit($post_id);
         return $post;   
     }

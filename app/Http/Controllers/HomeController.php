@@ -56,7 +56,9 @@ class HomeController extends Controller
     {
         $id = Auth::user()->id;
         $seeBody = Post::where("id", $post_id)->with(['comment.user' => function ($query) {$query->latest();}])->get();
-        Comment::where('post_id', $post_id)->update(['status' => 1]);
+        if( $seeBody[0]->user_id == $id){
+            Comment::where('post_id', $post_id)->update(['status' => 1]);
+        }
         $unread_comment = $this->getUnreadComment($id);
         $count = (count($unread_comment) == 0) ? (0) : (count($unread_comment[0]->comment));
         session(['count' => $count, 'post_id' => $post_id, 'posted_by'=> $seeBody[0]->user_id ]);
@@ -66,14 +68,18 @@ class HomeController extends Controller
 
     public function showNotifications()
     {
-        $post = Post::where("user_id", Auth::user()->id)->with([
+        $posts = Post::where("user_id", Auth::user()->id)->with([
         'comment'=> function($query){
-            $query->where('user_id', '!=',  Auth::user()->id);
+            $query->where([
+                ['user_id', '!=',  Auth::user()->id],
+                ['status', '==',  0]
+            ]);
         },
         'comment.user' => function ($query) {$query->latest();
         }
         ])->get();
-        return view('test', compact('post'));
+        
+        return view('test', compact('posts'));
     }
 
    

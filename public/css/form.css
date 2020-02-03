@@ -84,3 +84,8 @@
     margin-left: 15px;
 }
 /* end for autoscroll */
+
+.timestamps{
+    float: right;
+    margin-top:3%
+}
