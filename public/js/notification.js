@@ -51,7 +51,6 @@ function sendNotification(data){
     $('.message').prepend(message)
 }
 
-
 var channel = pusher.subscribe('post'+post_id);
 channel.bind('App\\Events\\CommentEvent',addComment)
 
