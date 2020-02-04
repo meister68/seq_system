@@ -53,9 +53,6 @@ function sendNotification(data){
 
 var channel = pusher.subscribe('post'+post_id);
 channel.bind('add-comment-event',addComment)
-channel.bind('update-comment-event', function () {
-    console.log('update event occured')
-})
 
 var channel2 = pusher.subscribe('user'+user_id);
 channel2.bind('send-notification-event',sendNotification)
