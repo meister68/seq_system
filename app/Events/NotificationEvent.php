@@ -13,15 +13,15 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class NotificationEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $user_id;
+    public $data;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($user_id)
+    public function __construct($data)
     {
-        $this->user_id = $user_id;
+        $this->data = $data;
     }
 
     /**
@@ -31,6 +31,6 @@ class NotificationEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('user'.$this->user_id);
+        return new PrivateChannel('user'.$this->data['user_id']);
     }
 }

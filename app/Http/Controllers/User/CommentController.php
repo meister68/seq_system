@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use Pusher\Pusher;
+use App\Events\CommentEvent;
+use App\Events\NotificationEvent;
 use App\CustomClass\CRUD;
 use App\CustomClass\PusherSetup;
 use Illuminate\Http\Request;
@@ -16,10 +18,9 @@ class CommentController extends Controller
 {
     public  function notify($data)
     {
-        $pusher = PusherSetUp::getPusher();
-      
-        $pusher->trigger('post'.$data['post_id'], 'App\\Events\\CommentEvent', $data);
-        $pusher->trigger('user'.session('posted_by'), 'App\\Events\\NotificationEvent', $data);
+        $data['posted_by'] = session('posted_by');
+        event(new CommentEvent($data));
+        event(new NotificationEvent($data));
     }
 
     public  function addComment(Request $request)
@@ -32,10 +33,11 @@ class CommentController extends Controller
             'post_id' => 'required',
             'status' => 'required|integer'
         ]);
-
+        $data = $validate_data;
         (new CRUD('Comment'))->store($validate_data);
-        $validate_data['username'] =  Auth::user()->name;
-        $this->notify($validate_data);
+        $data['username'] =  Auth::user()->name;
+        $data['event'] = 'add-comment-event';
+        $this->notify($data);
         return redirect('/content/'.$validate_data['post_id']);
       
     }
@@ -50,7 +52,9 @@ class CommentController extends Controller
     {
         
         $data = array('body' => $request->body);
-        (new CRUD('Comment'))->update($comment_id);
+        (new CRUD('Comment'))->update($data,$comment_id);
+        $data['event'] = 'update-comment-event';
+        event(new CommentEvent($data));
         return redirect('/home');
     }
 

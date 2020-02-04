@@ -1,5 +1,10 @@
 
- 
+var pusher = new Pusher('59a1d10e99c58e2524f0',
+{
+    cluster: 'ap1',
+    encrypted: true
+});
+
 $(document).ready(function(){
     if(count == 0){
         $('#notifCount').text('')   
@@ -31,11 +36,6 @@ function addComment(data)
     }
 }
 
-var pusher = new Pusher('59a1d10e99c58e2524f0',
-{
-    cluster: 'ap1',
-    encrypted: true
-});
 
 function sendNotification(data){
     let count = parseInt( $('#notifCount').text())
@@ -47,14 +47,17 @@ function sendNotification(data){
     $('#notifCount').text(count)
     let message = ` <li class="list-group-item list-group-item-secondary"> <a
     href="/content/${data.post_id}"><strong><span>${data.username}</span></strong>
-    commented on your post</a><span class="timestamps">${timestamp}</span></li>`
+    commented on your post </a><span class="timestamps">${timestamp}</span></li>`
     $('.message').prepend(message)
 }
 
 var channel = pusher.subscribe('post'+post_id);
-channel.bind('App\\Events\\CommentEvent',addComment)
+channel.bind('add-comment-event',addComment)
+channel.bind('update-comment-event', function () {
+    console.log('update event occured')
+})
 
 var channel2 = pusher.subscribe('user'+user_id);
-channel2.bind('App\\Events\\NotificationEvent',sendNotification)
+channel2.bind('send-notification-event',sendNotification)
 
 

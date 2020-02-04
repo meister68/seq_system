@@ -13,18 +13,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class CommentEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $user_id;
+    public $post_id;
+    public $data;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($post_id)
+    public function __construct($data)
     {
         
         //
-        $this->post_id = $post_id;
+        $this->post_id = $data['post_id'];
+        $this->data = $data;
     }
 
     /**

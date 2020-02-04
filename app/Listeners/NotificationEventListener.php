@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\NotificationEvent;
+use App\CustomClass\PusherSetup;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -26,6 +27,8 @@ class NotificationEventListener
      */
     public function handle(NotificationEvent $event)
     {
-        //
+        $pusher = PusherSetUp::getPusher();
+        $data = $event->data;
+        $pusher->trigger('user'.session('posted_by'), 'send-notification-event', $data);
     }
 }

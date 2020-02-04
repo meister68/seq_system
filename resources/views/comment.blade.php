@@ -37,8 +37,6 @@
                         <div class="form-group">
                             <strong class="float-right text-justify">{{$test->user->name}}</strong>
                             <p id="userBody" class="text-justify">{{$test->body}}</p>
-<<<<<<< HEAD
-=======
                             
                             <div class="dropdown">
                                 <button id="dropdown_comment" class="btn btn-outline-secondary dropdown-toggle float-left" type="button" data-toggle="dropdown">
@@ -51,7 +49,6 @@
                                 </ul> 
                             </div>
 
->>>>>>> avila
                         </div>
                     </div>
                     @else

@@ -23,15 +23,17 @@
 }
 
 #boxComment1 {
-    background-color:  #edd9ff;
-    margin-bottom: 1%;
+    box-shadow: 0px 0px 5px grey;
+    /* background-color:  #edd9ff; */
+    margin-bottom: 5%;
     padding-right: 3%;
     padding-left: 3%;
 }
 
 #boxComment2 {
-    background-color:  #B0C4DE;
-    margin-bottom: 1%;
+    box-shadow: 0px 0px 5px grey;
+    /* background-color:  #B0C4DE; */
+    margin-bottom: 5%;
     padding-left: 3%;
     padding-right: 3%;
 }
@@ -81,13 +83,3 @@
 #edit{
     margin-left: 15px;
 }
-<<<<<<< HEAD
-/* end for autoscroll */
-
-.timestamps{
-    float: right;
-    margin-top:3%
-}
-=======
-/* end for autoscroll */
->>>>>>> avila

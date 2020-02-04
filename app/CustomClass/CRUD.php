@@ -41,7 +41,6 @@ class CRUD
         }
         return $data;
         
-        // dd($data);
     }
 
     public function remove($id)

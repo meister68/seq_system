@@ -3,8 +3,10 @@
 namespace App\Listeners;
 
 use App\Events\CommentEvent;
+use App\CustomClass\PusherSetup;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Pusher\Pusher;
 use Log;
 
 class CommentEventListener
@@ -17,6 +19,7 @@ class CommentEventListener
     public function __construct()
     {
         //
+       
     }
 
     /**
@@ -27,7 +30,8 @@ class CommentEventListener
      */
     public function handle(CommentEvent $event)
     {
-        dd($event);
-        Log::info(json_encode($event));
+       $pusher = PusherSetUp::getPusher();
+       $data =  $event->data;
+       $pusher->trigger('post'.$data['post_id'], $data['event'], $data);
     }
 }
