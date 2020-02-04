@@ -15,20 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test','User\CommentController@notify');
+Route::get('test/','User\CommentController@notify');
 Route::get('notif', function () {
     return view('test');
 });
-// Route::get('/test2', function () {
-//     return 'test';
-// });
+// // Route::get('/test2', function () {
+// //     return 'test';
+// // });
 
-Route::any('/comment1', 'User\CommentController@addComment');
+ Route::any('/comment1', 'User\CommentController@addComment');
+
+ Route::get('/content/{id}','HomeController@seeBody')->name('seeBody');
+ Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/ask','HomeController@ask')->name('ask');
 Route::get('/search', 'SearchController@search')->name('search');
 
@@ -37,16 +38,16 @@ Route::get('/notification', 'HomeController@showNotifications')->name('user.noti
 
 Route::prefix('post')->group( function() {
     Route::post('/', 'User\PostController@addPost')->name('addPost');
-    Route::get('/edit/{id}', 'User\PostController@editPost');
-    Route::get('update/{id}', 'User\PostController@update');
-    Route::get('delete/{id}', 'User\PostController@removePost');
+    Route::get('/edit/{id}', 'User\PostController@editPost')->name('editPost');
+    Route::post('update/{id}', 'User\PostController@updatePost')->name('updatePost');
+    Route::get('delete/{id}', 'User\PostController@removePost')->name('deletePost');
 });
 
 Route::prefix('comment')->group( function() {
-    Route::post('/', 'User\CommentController@addComment')->name('addComment');
-    Route::get('/edit/{id}', 'User\PostController@editPost');
-    Route::get('update/{id}', 'User\PostController@update');
-    Route::get('delete/{id}', 'User\PostController@removePost');
+    Route::any('/', 'User\CommentController@addComment')->name('addComment');
+    Route::get('/edit/{id}', 'User\CommentController@editComment')->name('edit');
+    Route::get('update/{id}', 'User\CommentController@update')->name('update');
+    Route::get('delete/{id}', 'User\CommentController@removeComment')->name('deleteComment');
 });
 
 

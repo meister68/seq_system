@@ -13,35 +13,42 @@ class PostController extends Controller
     //
     public function addPost(Request $request)
     {
-       try{
-            $validate_data = $request->validate([
-                'user_id' => 'required',
-                'body' => 'required',
-                'title' => 'required'
-            ]);
-            $validate_data['user_id'] = $request->user()->id;
-            (new CRUD('Post'))->store($validate_data);
-       }
-        catch(\Exception $er){
-            return redirect()->back()->withInput()->withErrors('errors','Something went wrong. Please try again later.');
-        }
+        $validate_data = $request->validate([
+            'user_id' => 'required',
+            'title' => 'required',
+            'description' => 'required'
+        ]);
+        // dd($validate_data);
+
+        $validate_data['user_id'] = $request->user()->id;
+        (new CRUD('Post'))->store($validate_data);
         return redirect('/home');
     }
 
     public function editPost($post_id)  
     {   
         $post = (new CRUD('Post'))->edit($post_id);
-        return $post;   
+        //  $post = $post;
+        // dd(count($post[0]));
+        // $post = json_encode($post);
+        // return $post;
+        //$data['post'] = $post;
+        //return $data;
+         return view('editPost',compact('post'));  
     }
 
-    public function updatePost(Request $request, $post_id)
+    public function updatePost(Request $request)
     {
-        $data = array(
-            'title'=> $request->title,
-            'description'=> $request->description
-        );
+        
+        // $data = array(
+        //     'title'=> $request->title,
+        //     'description'=> $request->description
+        // );
+        // dd($data);
 
-        (new CRUD('Post'))->update($data,$post_id);
+        $update = (new CRUD('Post'))->update($request,$request->id);
+        // dd($update);
+        $update->save();
         return redirect('/home');
     }
 
@@ -50,6 +57,8 @@ class PostController extends Controller
         (new CRUD('Post'))->remove($post_id);
         return  redirect('/home');
     }
+
+    
 
     
 }

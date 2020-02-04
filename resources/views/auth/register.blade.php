@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-<link href="{{ asset('css/form.css') }}" rel="stylesheet">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6" id="div">

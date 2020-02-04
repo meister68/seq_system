@@ -23,6 +23,9 @@
                     @endif
 
                     <div class="form-group">
+                        <h6 >{{$seeBody[0]->user->name}}</h6>
+                        <!-- <code > {{$seeBody[0]->created_at}}</code> -->
+                        <hr>
                         <p class="font-weight-bold">{{ $seeBody[0]->title }}</p>
                         <p>{{ $seeBody[0]['description'] }}</p>
                         <hr>
@@ -34,6 +37,21 @@
                         <div class="form-group">
                             <strong class="float-right text-justify">{{$test->user->name}}</strong>
                             <p id="userBody" class="text-justify">{{$test->body}}</p>
+<<<<<<< HEAD
+=======
+                            
+                            <div class="dropdown">
+                                <button id="dropdown_comment" class="btn btn-outline-secondary dropdown-toggle float-left" type="button" data-toggle="dropdown">
+                                </button>
+
+                                <ul class="dropdown-menu">
+                                    <a href="{{ route('deleteComment', $test->id)}}">Delete</a>
+                                    
+                                    <a href="{{ route('edit', $test->id)}}">Edit</a>
+                                </ul> 
+                            </div>
+
+>>>>>>> avila
                         </div>
                     </div>
                     @else
