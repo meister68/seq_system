@@ -53,8 +53,6 @@ class CommentController extends Controller
         
         $data = array('body' => $request->body);
         (new CRUD('Comment'))->update($data,$comment_id);
-        $data['event'] = 'update-comment-event';
-        event(new CommentEvent($data));
         return redirect('/home');
     }
 
